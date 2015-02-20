@@ -1,0 +1,109 @@
+#!/bin/bash
+
+ CPATH="/web_content/components/"
+ PPATH="/web_content/pages/"
+ BASEPATH=${PWD}
+ PHP=".php"
+ SLASH="/"
+ HTMLHEAD="htmlhead.php"
+
+if [ $# -lt 2 ]
+then
+        echo "twa -c <component name> | -p <page name>  | -s <script name> | -t <style name> | -pkg <package name>" 
+        exit
+fi
+
+case "$1" in
+
+-c)  echo "creating component $2"
+    FPATH=$BASEPATH$CPATH$2$SLASH
+    TWAPATH=$BASEPATH$CPATH
+    if [[ -d "${FPATH}" && ! -L "${FPATH}" ]] ; then
+    	echo "Directory Already Exists"
+    	exit
+    else 
+    	if [[ -d "${TWAPATH}" && ! -L "${TWAPATH}" ]] ; then
+    		cd "$TWAPATH"
+			mkdir $2
+			cd "$2"
+			touch $2$PHP
+    	fi
+    fi
+    ;;
+-p)  echo "creating page $2"
+    FPATH=$BASEPATH$PPATH$2$SLASH
+    TWAPATH=$BASEPATH$PPATH
+    if [[ -d "${FPATH}" && ! -L "${FPATH}" ]] ; then
+    	echo "directory already exists"
+    	exit
+    else 
+    	if [[ -d "${TWAPATH}" && ! -L "${TWAPATH}" ]] ; then
+    		cd "$TWAPATH"
+			mkdir $2
+			cd $2
+			touch $2$PHP
+			touch $HTMLHEAD
+    	fi
+    fi
+    ;;
+-o) echo "opening file"
+	coda -w $BASEPATH$SLASH$2
+	;;
+-s) echo "creating $2 script"
+	SPATH="/web_content/javascripts/"
+	JS=".js"
+	TWAPATH=$BASEPATH$SPATH$2$JS
+	if [ -f "${TWAPATH}" ] ; then
+		echo "file already exists"
+    	exit
+	else 
+		cd "$BASEPATH$SPATH"
+		touch $2$JS
+	fi
+	;;
+-t) echo "creating $2 style"
+	SPATH="/web_content/styles/"
+	CSS=".css"
+	TWAPATH=$BASEPATH$SPATH$2$CSS
+	if [ -f "${TWAPATH}" ] ; then
+		echo "File Already Exists"
+    	exit
+	else 
+		cd "$BASEPATH$SPATH"
+		touch $2$CSS
+	fi
+	;;
+-pkg) echo "creating package $2"
+	PPATH="/web_content/pages/"
+	SPATH="/web_content/javascripts/"
+	TPATH="/web_content/styles/"
+	JS=".js"
+	CSS=".css"
+	PFPATH=$BASEPATH$PPATH$SLASH$2$SLASH$2$PHP
+	SFPATH=$BASEPATH$SPATH$SLASH$2$JS
+	TFPATH=$BASEPATH$TPATH$SLASH$2$CSS
+	if [ ! -f "${PFPATH}" ] ; then
+		echo "creating $2 page"
+		cd "$BASEPATH$PPATH"
+		mkdir $2
+		cd $2
+		touch $2$PHP
+		touch $HTMLHEAD
+		echo -e "<?php\n\$this->page_metadata();\n\$this->setScript('$2',time());\n\$this->setStyle('$2',time());\n?>" > $HTMLHEAD
+	fi
+	if [ ! -f "${SFPATH}" ] ; then
+		echo "creating $2 script"
+		cd "$BASEPATH$SPATH"
+		touch $2$JS
+	fi
+	if [ ! -f "${TFPATH}" ] ; then
+		echo "creating $2 style"
+		cd "$BASEPATH$TPATH"
+		touch $2$CSS
+	fi
+	;;
+-h) echo "twa -c <component name> | -p <page name>  | -s <script name> | -t <style name> | -pkg <package name>"    
+	;;
+*) echo "Invalid Command. Use -h for help"
+   ;;
+esac
