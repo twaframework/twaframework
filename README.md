@@ -16,7 +16,7 @@ No installation is necessary.  Simply download the code to the root directory of
 Configuring Database
 -----------------------------
 
-If you use the administration console, you can configure your database easily.  However if you wish to manually configure the database you will need to follow the instructions below.
+To configure the database you will need to follow the instructions below.
 
 	Go to /system/config/databases/twaDBConfig_default.php
 	public $host = '<databse host name>';
@@ -27,7 +27,7 @@ If you use the administration console, you can configure your database easily.  
 	public $prefix = '<table name prefix for e.g. 'twa_'>';
 	public $isDBConfigured = TRUE;
 	
-One your have added the parameters to connect to the database simply open your website http://mysite.com/.
+Once your have added the parameters to connect to the database simply open your website http://mysite.com/.
 Once on your home page, click "Create Tables" to create the necessary tables.
 
 Usage
@@ -206,3 +206,37 @@ This variable will be available as $title in your view.
 
 Variables like $framework, $app, $router and $debugger are available directly in your view.  
 Furthermore, $base_path defines the base path of your application, $content_path defines the path of your web_content folder while $base_url defines the base URL of your site and $content_url defines the url to access your web_content folder. 
+
+Using The Command Line
+----------------------
+
+As of version 8.2, twaframework comes with a command line tool for creating components, pages, javascript files and stylesheets.
+
+To use command line tools add the bin folder under twaframework to your PATH.
+	
+	EXPORT PATH=$PATH:/path/to/twaframework/bin
+	
+Using commands is really simple.
+
+To create a component:
+
+	twa -c <component name>
+	
+To create a page
+	
+	twa -p <page name>
+	
+To create a stylesheet
+
+	twa -t <stylesheet name>
+	
+To create a javascript
+
+	twa -s <script name>
+	
+Many times you need to add a page along with a javascript and stylesheet to go with it.  You then also need to include the javascript and stylesheet into your page. To do all this you can call the -pkg option
+
+	twa -pkg <page name>
+	
+
+
