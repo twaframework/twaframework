@@ -6,6 +6,22 @@ twaFramework Beta
 
 Note: twaFramework is currently in beta so you may expect some bugs, issues or unfinished features.
 
+What's New In 8.2
+=================
+
+We have added some exciting new features to twaframework.8.2
+
+1.  You can now create end-points with your web-service requests.  In previous versions of twaframework, your ajax requests were always sent to http://yoursite.com/webservices.php and you had to define to $_POST variables 'axn' and 'code' to decide which method you want to run.  Now you can simply add the axn and code to the URL as shown below:
+	For e.g.  to call the login service you were using axn = "framework/auth" and code = "login", now you can simply call "http://yoursite.com/1/framework/auth/login"
+
+2.	We have added command line tools to help speed up your development.  Check the command line tools section below
+
+3.  Social Media Logins are now built into the system.  Setup your configuration in social.js under the web_content/javascripts/ directory.  See the social logins section below for more information
+
+4.  New twaDeploy class allows you to perform git functions like commit, push and pull.
+
+5.  Image Editing.  We have added a class called twaImage that uses Imagick to perform all image editing functions like cropping, thumbnails, resizing, watermarks and more.
+
 
 Installation Instructions
 =========================
@@ -206,6 +222,111 @@ This variable will be available as $title in your view.
 
 Variables like $framework, $app, $router and $debugger are available directly in your view.  
 Furthermore, $base_path defines the base path of your application, $content_path defines the path of your web_content folder while $base_url defines the base URL of your site and $content_url defines the url to access your web_content folder. 
+
+Creating Models
+---------------
+
+Any good web application follows the MVC architecture.  Which means that you need to create models for your site. The main function of the model is to connect with the database to fetch content.  We have simplified this for you.
+To create a models for your application, navigate to the system/models/ folder and create a folder for your application
+
+	cd system/models
+	mkdir myapp
+
+We will place all our models in this directory.  To use our models we need to add them to the autoloader.  Navigate to the system/config/ directory and open the globals.php
+Add your model path to the $model_paths array
+
+	...
+	$model_paths = array(
+		'system/framework/',
+		'system/config/',
+	    'system/config/databases/',
+	    'system/models/myapp'
+	);
+	...
+
+Let us create our first model.  Let us call it Category.  We will start by creating a new file Category.php in the system/models/myapp/ directory.
+Let us create a table in our database for category test_category (where test_ is our table name prefix as defined in the database config) with fields category_id, name and description.  We will also create two additional fields created_on  and last_udpated_on of type DATETIME.  These fields will automatically record when the row was inserted and updated.
+
+Now in our Category.php file, we will start by creating a model that is an extension of the twaModel class.
+
+	```
+	<?php
+	
+	defined('_TWACHK') or die;
+	
+	class Category extends twaModel {
+	
+	public function __construct($id = null) {
+		
+		$this->meta = array(
+			"tablename" => "#__category",
+			"id" => "category_id"
+		);
+		
+		$this->fields = array(
+			"category_id" => "",
+			"name"  => "",
+			"membership_type"  => "",
+			"description" => "",
+			"created_on" => "",
+			"last_updated_on"=>""
+		);
+		
+		if($id) {
+			$this->fields[$this->meta['id']] = $id;
+			$this->Load();
+		}
+	}
+	
+	}
+	?>
+	```
+And we are done!  This is the most basic model that we can create. Since we extended our model from twaModel, we already have access to several methods including
+
+1.  Save($data)  - the Save method inserts or updates the row in the database depending on whether the category id exists.  The $data variable is an array of field names to values.
+
+	For e.g. if we want to create a new Category called "Category 1".  We can call the Save function as follows:
+	
+	$category = new Category();
+	$category_id = $category->Save(array(
+		"name"=>"Category 1",
+		"description"=>"Category 1 is a new category."
+	));
+	
+	Now let us say we want to update the description for this category.
+	
+	$category->Save(array(
+		"description"=>"Category 1 has just been updated."
+	));
+
+	You may also call the Save function as follows:
+	
+	$category = new Category($category_id);
+	$category->Save(array(
+		"description"=>"Category 1 has just been updated."
+	));
+	
+	Or 
+	
+	$category->Save(array(
+		"category_id"=>$category_id
+		"description"=>"Category 1 has just been updated."
+	));
+	
+2. Load()  - the Load method retrieves data from the database and populates the $this->fields array.
+
+3. Delete()  - the Delete method deletes the row from the database.
+
+4. ifExists() - the ifExists method checks to see if a field with a certain value already exists in the database.  
+	For e.g.  to check if Category 1 already exists
+	
+	$category->ifExists(array(
+		"field"=>"name",
+		"value"=>"Category 1"
+	));
+	
+5. getJSON() - returns the $this->fields array in json encoded format.
+
 
 Using The Command Line
 ----------------------
