@@ -1,10 +1,4 @@
-var social_config = {
-	facebook: {
-		enabled: true,
-		appId: 999357533411421,
-		scope: 'email, user_friends'
-	}
-};
+var social_config = {};
 
 /*
 	Sample Configuration	
@@ -79,7 +73,6 @@ document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
 /****************************************************************************/
 
 function SocialLogins(data) {
-	console.debug("Loading...");
 	this.properties = {
 		"facebook":{
 			enabled: false,
@@ -96,17 +89,19 @@ function SocialLogins(data) {
 		"gplus":{
 			enabled: false,
 			status: 'not-connected'
+		},
+		"appLogin":{
+			
 		}
 	}
 	
 	$.extend(this.properties,data);
-	this.init();
+	
 }
 
 SocialLogins.prototype.init = function(){
-	console.debug("Initializing...");
+	
 	if(this.properties.facebook.enabled){
-		console.debug("Loading FB");
 		this.initFB();
 	}
 	
@@ -127,7 +122,7 @@ SocialLogins.prototype.init = function(){
 
 SocialLogins.prototype.initGPlus = function(){
 	var me = this;
-	if(typeof gapi == 'undefined'){
+	if(typeof gapi !== 'undefined'){
 		this.loadGPlus();
 		return;
 	}
@@ -136,8 +131,7 @@ SocialLogins.prototype.initGPlus = function(){
 
 SocialLogins.prototype.initFB = function(){
 	var me = this;
-	
-	if(typeof FB == 'undefined'){
+	if(typeof FB !== 'undefined'){
 		this.loadFB();
 		return;
 	}
@@ -146,7 +140,7 @@ SocialLogins.prototype.initFB = function(){
 
 SocialLogins.prototype.initLinkedIn = function(){
 	var me = this;
-	if(typeof IN == 'undefined'){
+	if(typeof IN !== 'undefined'){
 		this.loadLinkedIn();
 		return;
 	}
@@ -265,15 +259,6 @@ SocialLogins.prototype.loginWithGPlus = function(){
 
 SocialLogins.prototype.loginWithFB = function(){
 	var me = this;
-	if(typeof FB == 'undefined'){
-		if(me.properties.facebook['status'] == 'initialized'){
-			setTimeout(function(){
-				me.loginWithFB();
-			}, 200);
-		} else {
-			console.debug("Unable to Connect to FB");
-		}
-	}
 	FB.login(function(obj) {
 		 if (obj.authResponse) {
 			FB.api('/me', {fields: "id, first_name, last_name, email, picture"}, function(obj) {
@@ -317,21 +302,28 @@ SocialLogins.prototype.appLogin = function(obj){
 		
 		var properties = {
 			"axn":"framework/auth",
-			"code":"socialLogin",
-			"type":"social"
+			"code":"socialLogin"
 		}
-		
+		$.extend(properties,social_config.appLogin);
 		$.extend(properties,obj);
 		
 		$framework.request(properties,function(r){
+			var data = r;
+			data.input = properties;
+			
 			$user.fields = r.user;
 			$user.social = r.social;
-			$.event.trigger("loginComplete",r);
+			if(r.new == 1){
+				$.event.trigger("signupComplete",data);	
+			} else {
+				$.event.trigger("loginComplete",data);	
+			}
+			
 		});
+	});
 }
 
 SocialLogins.prototype.loadFB = function(){
-  console.debug("Adding FB");
   var me = this;	
   window.fbAsyncInit = function() {
 		FB.init({
@@ -372,4 +364,5 @@ SocialLogins.prototype.loadLinkedIn = function(){
 
 
 var social = new SocialLogins(social_config);
+
 

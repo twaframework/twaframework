@@ -115,7 +115,6 @@ public function forgotpassword() {
 	}
 	if(!$user->loadWithEmail($router->getCleanPost())) {
 		$this->fail(204,"Unable to retrieve your account");
-		
 	}
 	$auth = uniqid();
 	
@@ -133,7 +132,7 @@ public function forgotpassword() {
 	}
 		
 	$url = $protocol.$_SERVER['SERVER_NAME'].str_replace('webservices.php','',$_SERVER['REQUEST_URI']);
-	$url = $url.$data['view']."/auth-".$auth;
+	$url = $url.$data['view']."/".$auth;
 	
 	$info = array();
 	$info['to'] = $user->fields['email'];

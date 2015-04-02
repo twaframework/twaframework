@@ -140,9 +140,20 @@ public function SendEmail($data)
 		}
 	}
 	
+	$to = array();
+	if(gettype($data['to']) == "array"){
+		foreach($data['to'] as $email_address){
+			if($this->spamcheck($email_address)){
+				$to[] = $email_address;
+			}
+		}
+	} else {
+		if($this->spamcheck($data['to'])){
+			$to[] = $data['to'];
+		}
+	}
 	
-	$spamfilter = $this->spamcheck($data['to']);
-	if($spamfilter)
+	if($to)
 	{ 
 		try {
 			global $ses;
@@ -154,7 +165,7 @@ public function SendEmail($data)
 			    'Source' => $emailsettings->fromemail,
 			    // Destination is required
 			    'Destination' => array(
-			        'ToAddresses' => array($data['to'])
+			        'ToAddresses' => $to
 			    ),
 			    // Message is required
 			    'Message' => array(
