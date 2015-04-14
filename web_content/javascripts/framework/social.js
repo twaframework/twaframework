@@ -300,26 +300,25 @@ SocialLogins.prototype.loginWithLinkedIn = function(){
 
 SocialLogins.prototype.appLogin = function(obj){
 		
-		var properties = {
-			"axn":"framework/auth",
-			"code":"socialLogin"
-		}
-		$.extend(properties,social_config.appLogin);
-		$.extend(properties,obj);
+	var properties = {
+		"axn":"framework/auth",
+		"code":"socialLogin"
+	}
+	$.extend(properties,social_config.appLogin);
+	$.extend(properties,obj);
+	
+	$framework.request(properties,function(r){
+		var data = r;
+		data.input = properties;
 		
-		$framework.request(properties,function(r){
-			var data = r;
-			data.input = properties;
-			
-			$user.fields = r.user;
-			$user.social = r.social;
-			if(r.new == 1){
-				$.event.trigger("signupComplete",data);	
-			} else {
-				$.event.trigger("loginComplete",data);	
-			}
-			
-		});
+		$user.fields = r.user;
+		$user.social = r.social;
+		if(r.new == 1){
+			$.event.trigger("signupComplete",data);	
+		} else {
+			$.event.trigger("loginComplete",data);	
+		}
+		
 	});
 }
 

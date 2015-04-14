@@ -41,8 +41,7 @@ var $authtoken = '<?php echo $_SESSION['_twa_auth_token']; ?>';
 <script type='text/javascript' src="<?php echo $app->siteurl; ?>web_content/javascripts/utilities/plugins.js"></script>
 <script type='text/javascript' src="<?php echo $app->siteurl; ?>web_content/javascripts/framework/framework.js"></script>
 <script type='text/javascript' src="<?php echo $app->siteurl; ?>web_content/javascripts/framework/social.js"></script>
-<script type='text/javascript' src="<?php echo $app->siteurl; ?>web_content/javascripts/framework/user.js"></script>
-<script type='text/javascript' src="<?php echo $app->siteurl; ?>web_content/javascripts/utilities/calendar.js"></script>
+<script type='text/javascript' src="<?php echo $app->siteurl; ?>web_content/javascripts/framework/user.js"></script
 <script type='text/javascript' src="<?php echo $app->siteurl; ?>web_content/javascripts/utilities/ellipsis.js"></script>
 <script type='text/javascript' src="<?php echo $app->siteurl; ?>web_content/javascripts/framework/socket.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">

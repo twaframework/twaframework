@@ -27,6 +27,7 @@ public $_viewid=null;
  * @var string
  */
 public $_controllerid=null;
+public $language = null;
 /**
  * The controller instance
  *
@@ -86,7 +87,7 @@ public function __construct($app_type="app") {
 	$this->controller = new $controller_class();
 	$this->siteurl = $router->getFromURL('siteurl');
 	$this->secureurl = $router->getFromURL('secureurl');
-	
+	$this->language = $framework->load('twaLanguage');
 }
 
 /**
@@ -130,7 +131,7 @@ if($config->maintenanceMode) {
 
 
 echo "<!DOCTYPE HTML>";
-echo "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en-us' lang='en-us' dir='ltr' >";
+echo "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='".$this->language->config['code']."' lang='".$this->language->config['code']."' dir='".$this->language->config['dir']."' >";
 
 $this->_isOpenHtml = 1;
 
@@ -187,56 +188,6 @@ public function hasAccess() {
 		return $this->controller->hasAccess();
 	}
 	return false;
-	
-}
-
-/**
- * Loads any custom model 
- *
- * @param string $modelid the name of the model
- * @return boolean true if model is loaded successfully.
- *
- * @access public
- */
-public function LoadModel($modelid)
-{
-	global $framework;
-	
-	$modelpath = $framework->systempath.DS.'models'.DS.$modelid.'.php';
-		
-	if(file_exists($modelpath)) {
-		require_once $modelpath;
-		return true;
-	}
-	else {
-		$framework->load('twaDebugger')->log('File not found: '.$modelpath);
-		return false;
-	}
-}
-
-/**
- * Loads any custom model package.  A package loads a single file that in turn can initialize multiple model classes.
- *
- * @param string $packageid the name of the package
- * @return boolean true if model is loaded successfully.
- *
- * @access public
- */
-public function LoadModelPackage($packageid)
-{
-	global $framework;
-	
-	$packagepath = $framework->systempath.DS.'models'.DS.$packageid.'.php';
-		
-	if(file_exists($packagepath)) {
-		require_once $packagepath;
-		return true;
-	}
-	else {
-		$framework->load('twaDebugger')->log('File not found: '.$module_path);
-		return false;
-	}
-
 	
 }
 

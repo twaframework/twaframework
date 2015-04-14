@@ -21,6 +21,19 @@ public $path = null;
  */
 public $lang = null;
 
+public $languages = array(
+	"en_US" => array(
+		"code" => "en-us",
+		"dir" => "ltr"
+	),
+	"ar_SA"=>array(
+		"code"=>"ar-sa",
+		"dir"=>"rtl"
+	)
+);
+
+public $config = array();
+
 /**
  * Starting point for twaLanguage
  *
@@ -41,6 +54,7 @@ public function __construct() {
 	$_SESSION['lang'] = $lang;
 	
 	$this->path = $framework->contentpath.DS.'language'.DS.$this->lang;
+	$this->config = $this->languages[$this->lang];
 }
 
 /**
