@@ -245,7 +245,7 @@ public function signup() {
 				),
 				array(
 					"field"=>"user_id",
-					"value"=>intval($newuser->fields['user_id'])
+					"value"=>$newuser->fields['user_id']
 				)
 			)
 		));

@@ -68,7 +68,7 @@ DROP TABLE IF EXISTS `#__user_group`;
 
 CREATE TABLE `#__user_group` (
   `twa_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` VARCHAR (255) DEFAULT NULL,
   `group_id` int(11) DEFAULT NULL,
   `sort_order` int(11) DEFAULT NULL,
   PRIMARY KEY (`twa_id`)
@@ -81,7 +81,7 @@ CREATE TABLE `#__user_group` (
 
 DROP TABLE IF EXISTS `#__user_groups`;
 
-CREATE TABLE `#__user_groups` (
+CREATE TABLE `#__groups` (
   `group_id` int(11) NOT NULL AUTO_INCREMENT,
   `group_name` varchar(255) DEFAULT NULL,
   `redirect_url` varchar(255) DEFAULT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE `#__blocked_users_list` (
 DROP TABLE IF EXISTS `#__user_social`;
 
 CREATE TABLE `#__user_social` (
-  `user_id` int(11) unsigned NOT NULL,
+  `user_id` VARCHAR (255) unsigned NOT NULL,
   `fb_id` varchar(255) DEFAULT NULL,
   `gplus_id` varchar(255) DEFAULT NULL,
   `twitter_id` varchar(255) DEFAULT NULL,

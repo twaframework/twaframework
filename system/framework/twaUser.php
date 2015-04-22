@@ -144,7 +144,7 @@ public static function getSocialPassword($data){
 public function social() {
 	global $framework;
 	$db = $framework->getDB();
-	$sql = "SELECT * FROM #__user_social WHERE user_id = ".$db->dbquote($this->fields['user_id']);
+	$sql = "SELECT user_id, fb_id, gplus_id, twitter_id, linkedin_id  FROM #__user_social WHERE user_id = ".$db->dbquote($this->fields['user_id']);
 	$result = $db->runQuery($sql.";");
 	
 	if($result){
