@@ -22,8 +22,7 @@ class twaWebServices_framework_database extends twaWebServices {
 public function runSQL() {
 	global $framework;
 	$router = $framework->load('twaRouter');
-	global $app;
-	
+
 	$database = $framework->getDB($router->getPost('db'));
 	$result = $database->runSQLFile(BASE_PATH.DS.$router->getPost('filename'));
 	
@@ -64,28 +63,6 @@ public function test() {
 	}
 	
 	echo '{"returnCode":0}';
-}
-
-/**
- * Creates the basic tables required by twaFramework
- * Used by admin.php to create the basic tables required by twaFramework
- * POST variables must specify the information of th db and the filename of the SQL file.
- * 
- * @return String A JSON string is returned with "returnCode" = 0 if successful, and 1 on error.
- * @access public
- */
-public function createtables() {
-	global $framework;
-	
-	$database = $framework->getDB($this->router->getPost('db'));
-	$result = $database->runSQLFile(BASE_PATH.DS.$this->router->getPost('filename'));
-	
-	if(!$result) {
-		$this->fail(109,"Unable to run file");
-		
-	} else {
-		echo '{"returnCode":0}';	
-	}
 }
 
 

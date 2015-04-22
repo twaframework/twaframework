@@ -18,7 +18,6 @@ class twaWebServices_framework_auth extends twaWebServices {
  */
 public function login() {
 	global $framework;
-	global $app;
 	$router = $framework->load('twaRouter');
 	$user = $framework->getUser();
 	
@@ -34,7 +33,6 @@ public function login() {
 
 public function socialLogin(){
 	global $framework;
-	global $app;
 	$router = $framework->load('twaRouter');
 	$user = $framework->getUser();
 	$password = twaUser::getSocialPassword($router->getCleanPost());
@@ -88,7 +86,6 @@ public function user() {
 public function logout() {
 	global $framework;
 	global $app;
-	$router = $framework->load('twaRouter');
 	$user = $framework->getUser();
 	if($user->Logout()) {
 		echo '{"returnCode":0}';
@@ -197,8 +194,6 @@ public function resetpassword() {
 public function signup() {
 	global $framework;
 	$router = $framework->load('twaRouter');
-	global $app;
-	$user = $framework->getUser();
 	$newuser = new twaUser();
 	$newuser->Logout();
 	$data = $router->getCleanPost();
@@ -267,7 +262,6 @@ public function signup() {
  */
 public function checkemail() {
 	global $framework;
-	global $app;
 	$router = $framework->load('twaRouter');
 	$user = $framework->getUser();	
 	if($user->ifExists(array(
@@ -287,8 +281,6 @@ public function checkemail() {
  */
 public function isadmin() {
 	global $framework;
-	global $app;
-	$router = $framework->load('twaRouter');
 	$user = $framework->getUser();
 	if($user->isLoggedIn() && in_array($user->fields['user_id'], $framework->load('twaConfig')->admin_accounts)) {
 		echo '{"returnCode":0,"admin":1}';

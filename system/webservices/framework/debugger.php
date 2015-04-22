@@ -22,8 +22,7 @@ class twaWebServices_framework_debugger extends twaWebServices {
 public function check() {
 	global $framework;
 	$router = $framework->load('twaRouter');
-	global $app;
-	
+
 	$debugger = $framework->load('twaDebugger');
 	$val = $debugger->check($router->getCleanPost());
 	

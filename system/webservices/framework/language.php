@@ -22,8 +22,6 @@ class twaWebServices_framework_language extends twaWebServices {
 public function change() {
 	global $framework;
 	$router = $framework->load('twaRouter');
-	global $app;
-	
 	$lang = $framework->load('twaLanguage');
 	$lang->setLanguage($router->getPost('lang'));	
 	echo '{"returnCode":0}';	

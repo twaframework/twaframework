@@ -21,7 +21,6 @@ class twaWebServices_framework_load extends twaWebServices {
  */
 public function load () {
     global $framework;
-	global $app;
 	$router = $framework->load('twaRouter');
 	require $framework->basepath.DS.$router->getPost('path');
 }

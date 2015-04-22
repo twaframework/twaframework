@@ -23,8 +23,6 @@ class twaWebServices_framework_file extends twaWebServices {
 public function upload() {
 	global $framework;
 	$router = $framework->load('twaRouter');
-	global $app;
-	global $client;
 	$files = $router->getPost('files');
 	$uploaded = array();
 	$framework->load('twaDebugger')->dump($files);
@@ -94,8 +92,7 @@ public function download() {
 public function delete() {
 	global $framework;
 	$router = $framework->load('twaRouter');
-	global $app;
-	
+
 	$file = new twaFile($router->getPost('path'));
 	$file->delete();
 	

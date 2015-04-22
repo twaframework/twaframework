@@ -44,7 +44,6 @@ public function __construct() {
 	$this->app = $app;
 	$this->router = $framework->load('twaRouter');
 	$this->debugger = $framework->load('twaDebugger');
-	
 	$this->authenticate($this->router->getRoutes()->security);
 }
 /**
@@ -59,13 +58,7 @@ public function __construct() {
 public function authenticate($type) {
 	$axn = $this->router->getPost('axn');
 	$code = $this->router->getPost('code');
-	global $analytics;
-	
-	$analytics->track("Web Service Called",array(
-		"axn" => $axn,
-		"code" => $code
-	));
-	
+
 	
 	if(isset($this->router->getRoutes()->service[$axn."/".$code])) {
 		if($this->router->getRoutes()->service[$axn."/".$code]['access'] == AUTHORIZE_ALL) {
