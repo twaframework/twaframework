@@ -96,7 +96,7 @@ CREATE TABLE `#__user_groups` (
 DROP TABLE IF EXISTS `#__users`;
 
 CREATE TABLE `#__users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` VARCHAR (255) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,

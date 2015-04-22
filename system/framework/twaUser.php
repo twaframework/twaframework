@@ -41,6 +41,8 @@ public function __construct($id=null) {
 		"last_updated_on"  => "",
 		"last_logged_in" => ""
 	);
+
+    $this->protected_fields = array("password","authcode","cookie");
 	
 	if(!$id)
 	{
@@ -222,8 +224,6 @@ public function Create($data) {
 	global $app;
 	
 	$database = $framework->getDB();
-	$user = $framework->getUser();
-	$debugger = $framework->load('twaDebugger');
 	
 	if(isset($data['password'])) {
  		$options = array(
@@ -231,7 +231,9 @@ public function Create($data) {
 		);
 		$data['password'] = password_hash($data['password'], PASSWORD_BCRYPT, $options);
  	}
-	
+
+    $data['user_id'] = md5(uniqid());
+
 	$sql = "SELECT * FROM #__blocked_user_list WHERE email=".$database->dbquote($data['email'])."";
 	if($database->runQuery($sql)) {
 		$this->onError("Account suspended. Contact Administrator.");
@@ -254,9 +256,9 @@ public function Create($data) {
 	
 	$str_insert .= " , created_on = now(), last_updated_on = now()";
 	$r = $database->runQuery($str_insert.";");
-	//$debugger->dump($r);
+
 	if($r !== FALSE) {
-		$this->fields[$this->meta['id']] = $database->last_insert_id;
+		$this->fields[$this->meta['id']] = $data['user_id'];
 		$this->Load();	
 		return $this->fields[$this->meta['id']];
 	}
@@ -271,112 +273,43 @@ public function Create($data) {
  * @return boolean TRUE on success, FALSE if fail
  * @access public
  */
-public function Update($data) {
+public function Update($data)
+{
     global $framework;
     global $app;
-    
-    if(isset($data['password'])) {
- 		$options = array(
-		    'cost' => 12,
-		);
-		$data['password'] = password_hash($data['password'], PASSWORD_BCRYPT, $options);
- 	}
-    
+
+    if (isset($data['password'])) {
+        $options = array(
+            'cost' => 12,
+        );
+        $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT, $options);
+    }
+
     $database = $framework->getDB();
-    $sql = "UPDATE ".$this->meta['tablename']." SET ";
-    
-    $comma = "";
-	
-	if($this->fields) {
-		$comma = "";
-		foreach($this->fields as $field=>$value) {
-			
-			if(isset($data[$field])) {
-				
-				$sql .= $comma." ".$field." = ".$database->dbquote($data[$field])." ";	
-			
-				$comma = ",";
-			}
-			
-		}
-	}
-    $sql .= " , last_updated_on = now() WHERE ".$this->meta['id']."=".$database->dbquote($this->fields[$this->meta['id']])."";
-    $r =$database->runQuery($sql.";");
-    if($r !== FALSE) {
-		$this->Load();	
-		return true;
-	}
-	return false;   
-    
-}
+    $sql = "UPDATE " . $this->meta['tablename'] . " SET ";
 
-/**
- * Inserts a row into the database for the model or updates it.
- *
- * @param Array $data contains the values for all the fields
- * @access public
- */
-public function Save($data) {
-	global $framework;
-	global $app;
-	
-	$database = $framework->getDB();
-	$user = $framework->getUser();
-	$debugger = $framework->load('twaDebugger');
-	
-	if(isset($data['password'])) {
- 		$options = array(
-		    'cost' => 12,
-		);
-		$data['password'] = password_hash($data['password'], PASSWORD_BCRYPT, $options);
- 	}
-	
-	$str_insert = "INSERT INTO ".$this->meta['tablename']." SET "; 
-	
-	if($this->fields) {
-		$comma = "";
-		foreach($this->fields as $field=>$value) {
-			
-			if(isset($data[$field])) {
-				$str_insert .=	$comma." `".$field."` = ".$database->dbquote($data[$field])." ";	
-				$comma = ",";
-			}
-			
-		}
-	}
-	
-	$str_insert .= " , created_on = UTC_TIMESTAMP(), last_updated_on = UTC_TIMESTAMP() ON DUPLICATE KEY UPDATE ";
-	
-	if($this->fields) {
-		$comma = "";
-		foreach($this->fields as $field=>$value) {
-			
-			if(isset($data[$field]) && $field != $this->meta['id']) {
-				$str_insert .=	$comma." `".$field."` = ".$database->dbquote($data[$field])." ";	
-				$comma = ",";
-			}
-			
-		}
-	}
-	$str_insert .= ", last_updated_on = UTC_TIMESTAMP()";
-	
-	$debugger->log($str_insert);
-	$r = $database->runQuery($str_insert.";");
-	
-	if($r !== FALSE) {
-		
-		if(isset($data[$this->meta['id']])){
-			$this->fields[$this->meta['id']] = $data[$this->meta['id']];
-		} else {
-			$this->fields[$this->meta['id']] = $database->last_insert_id;	
-		}
-		$this->Load();	
-		return $this->fields[$this->meta['id']];
-	}
-	return false;
-	
-}
+    if ($this->fields) {
+        $comma = "";
+        foreach ($this->fields as $field => $value) {
 
+            if (isset($data[$field])) {
+
+                $sql .= $comma . " " . $field . " = " . $database->dbquote($data[$field]) . " ";
+
+                $comma = ",";
+            }
+
+        }
+    }
+    $sql .= " , last_updated_on = now() WHERE " . $this->meta['id'] . "=" . $database->dbquote($this->fields[$this->meta['id']]) . "";
+    $r = $database->runQuery($sql . ";");
+    if ($r !== FALSE) {
+        $this->Load();
+        return true;
+    }
+    return false;
+
+}
 
 /**
  * Check if user is logged in
@@ -406,14 +339,9 @@ public function isLoggedIn() {
  */
 public function Login($data) {
 	global $framework;
-	global $analytics;
 	$database = $framework->getDB();
-	$debugger = $framework->load('twaDebugger');
 	if(isset($data['email'])) {
-		
 		$return = $database->runQuery("SELECT * FROM #__users WHERE email=".$database->dbquote($data['email']).";");
-	} else if(isset($data['username'])) {
-		$return = $database->runQuery("SELECT * FROM #__users WHERE username=".$database->dbquote($data['username']).";");
 	} else {
 		return false;
 	}
@@ -421,22 +349,21 @@ public function Login($data) {
 	if($return) {
 		$hash = $return[0]->password;
 		
-		if($return[0]->approved == '0' && $usersettings->authorizerequired == '1') {
+		if($return[0]->approved == '0') {
 			$framework->load('twaDebugger')->log('User is not approved.');
 			$this->onError("User is not approved.");
 			return FALSE;
 		}
-		
-		if(isset($return[0]->blocked) && $return[0]->blocked == '1') {
-			$framework->load('twaDebugger')->log('User blocked.');
-			$this->onError("Account Suspended. Please contact the administrator.");
-			return FALSE;
-		}
+
+        $sql = "SELECT * FROM #__blocked_user_list WHERE email=".$database->dbquote($data['email'])."";
+        if($database->runQuery($sql)) {
+            $this->onError("Account suspended. Contact Administrator.");
+            return false;
+        }
 	
 		if(password_verify($data['password'], $hash)) {
 			if(!$this->isLoggedIn()){
-				
-				
+
 				$authcode = md5($data['email']);
 				$_SESSION['twatoken'] = $authcode;
 				$_SESSION['twaUserID']= $return[0]->user_id;
@@ -445,15 +372,12 @@ public function Login($data) {
 				$this->Update(array(
 					"last_logged_in" => date('Y-m-d g:i:s',strtotime('now'))
 				));
-				
-				$analytics->track("User Logged In");
-				
+
 				return TRUE;
 			} else {
 				$framework->load('twaDebugger')->log('User '.$return[0]->user_id.' is already logged in.');
 				$this->onError("User ".$return->user_id." is already logged in.");
-				
-				$analytics->track("User Logged In");
+
 				return TRUE;
 			}
 		}
@@ -481,10 +405,8 @@ public function Login($data) {
  * @access public
  */
 public function Logout() {
-	global $analytics;
 	unset($_SESSION['twatoken']);
 	unset($_SESSION['twaUserID']);
-	$analytics->track("User Logged Out");
 	return TRUE;
 }
 /**
@@ -512,43 +434,7 @@ public function hasAccess($accesslevels="") {
 	}
 	return FALSE;
 }
-/**
- * Get user data in JSON format
- *
- * Get all the fields except the password information about the user in JSON format.
- * 
- * @return String JSON string with all the user information.
- * @access public
- */
-public function getJSON() {
-	if($this->fields) {
-		 $str = '{';
-		 $comma = "";
-		foreach($this->fields as $field=>$value) {
-			if($field != 'password' && $field != 'authcode') {
-				if (strpos($field, '_json') > 0 && $value != '') {
-					$str .= $comma.'"'.$field.'":'.$value.'';
-				} else {
-					if (strpos($value, '"') > 0)
-	                    $value = htmlspecialchars($value);
-					$value =  str_replace(array("\\","{","}"),array("/","&#123;","&#125;"),$value);
-					$str .= $comma.'"'.$field.'":"'.$value.'"';
-				}
-				$comma = ",";
-			}
-		}
-		$str .= '}';
-	}
-	
-	$data = @json_decode($str);
-	if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
-		$this->onError("Unable to parse JSON");
-		return '{"error":"Unable to parse JSON"}';
-	} else {
-		return $str;
-	}
-	
-}
+
 
 
 }

@@ -9,6 +9,10 @@ defined('_TWACHK') or die;
 
 class twaModel {
 
+
+public $fields = array();
+public $protected_fields = array();
+
 /**
  * The error string
  *
@@ -74,7 +78,19 @@ public function Save($data) {
 	$database = $framework->getDB();
 	$user = $framework->getUser();
 	$debugger = $framework->load('twaDebugger');
-	
+
+    /* Check if primary key is already defined and set that */
+
+    if($this->fields[$this->meta['id']] != ""){
+        if(isset($data[$this->meta['id']])) {
+            if($data[$this->meta['id']] != $this->fields[$this->meta['id']]) {
+                $this->onError("Mismatched Primary Key.");
+            }
+        } else {
+            $data[$this->meta['id']] = $this->fields[$this->meta['id']];
+        }
+    }
+
 	$str_insert = "INSERT INTO ".$this->meta['tablename']." SET "; 
 	
 	if($this->fields) {
@@ -119,90 +135,6 @@ public function Save($data) {
 	
 }
 
-/**
- * DEPRECATED
- * Inserts a row into the database for the model.
- *
- * @param Array $data contains the values for all the fields
- * @access public
- */
-public function Create($data) {
-	
-	global $framework;
-	global $app;
-	
-	$database = $framework->getDB();
-	$debugger = $framework->load('twaDebugger');
-	$debugger->log("Warning! Use of deprecated function Create()");
-	
-	$str_insert = "INSERT INTO ".$this->meta['tablename']." SET "; 
-	
-	if($this->fields) {
-		$comma = "";
-		foreach($this->fields as $field=>$value) {
-			
-			if(isset($data[$field])) {
-				$str_insert .=	$comma." `".$field."` = ".$database->dbquote($data[$field])." ";	
-				$comma = ",";
-			}
-			
-		}
-	}
-	
-	$str_insert .= " , created_on = UTC_TIMESTAMP(), last_updated_on = UTC_TIMESTAMP()";
-	$debugger->log($str_insert);
-	$r = $database->runQuery($str_insert.";");
-	if($r !== FALSE)
-	{
-		$this->fields[$this->meta['id']] = $database->last_insert_id;
-		$this->Load();	
-		return $this->fields[$this->meta['id']];
-	}
-	return false;
-	
-}
-
-/**
- * DEPRECATED
- * Update a row in the database for the given identifier.
- *
- * @param Array $data contains the values for all the fields
- * @access public
- */
-public function Update($data) {
-    global $framework;
-    global $app;
-    $debugger = $framework->load('twaDebugger');
-	$debugger->log("Warning! Use of deprecated function Update()");
-    
-    $database = $framework->getDB();
-    $sql = "UPDATE ".$this->meta['tablename']." SET ";
-    
-    $comma = "";
-	
-	if($this->fields) {
-		$comma = "";
-		foreach($this->fields as $field=>$value) {
-			
-			if(isset($data[$field])) {
-				
-				$sql .= $comma." `".$field."` = ".$database->dbquote($data[$field])." ";	
-			
-				$comma = ",";
-			}
-			
-		}
-	}
-    $sql .= " , last_updated_on = UTC_TIMESTAMP() WHERE ".$this->meta['id']."=".$database->dbquote($this->fields[$this->meta['id']])."";
-    $r = $database->runQuery($sql.";");
-    if($r !== FALSE)
-	{
-		$this->Load();	
-		return true;
-	}
-	return false;   
-    
-}
 /**
  * Delete a row in the database for the given identifier.
  *
@@ -276,86 +208,6 @@ public function remove($dep,$data){
 }
 
 /**
- * DEPRECATED
- * Get a list of rows from a table for a matching condition
- *
- * @param Array $data contains the fields, table name, filters and sort order
- * @return Array the array of rows that fit the matching condition
- * @access public
- */
-
-public function getList($data) {
-	global $framework;
-    global $app;
-	$database = $framework->getDB();
-	$debugger = $framework->load('twaDebugger');
-	$debugger->log("Warning! Use of deprecated function getList()");
-	
-	$sql = "SELECT ".$data['list_id']." FROM ".$data['table']." WHERE ".$this->meta['id']."=".$database->dbquote($this->fields[$this->meta['id']])." ";
-	
-	if(isset($data['filters']) && gettype($data['filters']) == 'array') {
-		$comma = " AND ";
-		foreach($data['filters'] as $filter) {
-			$sql .= $comma." ".$filter['field']." ".$filter['is']." ".$database->dbquote($filter['value'])." ";
-		}
-	}
-	
-	if(isset($data['sort']) && gettype($data['sort']) == 'array') {
-		$comma = " ORDER BY ";
-		foreach($data['sort'] as $sort) {
-			$sql .= $comma." ".$sort['field']." ".$sort['direction'];
-			$comma = ",";
-		}
-	}
-	
-	if($result = $database->runQuery($sql.";"))
-	{
-		
-		$result_array = array();
-		foreach($result as $object) {
-			
-			$result_array[$object->$data['list_id']] = new $data['object']($object->$data['list_id']);
-			
-		}
-		return $result_array;
-	}
-	return false;
-	
-}
-
-/**
- * DEPRECATED
- * Get a list of rows from a table for a matching condition
- *
- * @param Array $data contains the fields, table name, filters and sort order
- * @return Array the array of rows that fit the matching condition
- * @access public
- */
-public function getData($data) {
-	global $framework;
-    global $app;
-	$database = $framework->getDB();
-	$debugger = $framework->load('twaDebugger');
-	$debugger->log("Warning! Use of deprecated function getData()");
-	
-	$sql = "SELECT ".$data['list_id']." FROM ".$data['table']." WHERE ".$this->meta['id']."=".$database->dbquote($this->fields[$this->meta['id']])." ";
-	
-	if(isset($data['filters']) && gettype($data['filters']) == 'array') {
-		$comma = " AND ";
-		foreach($data['filters'] as $filter) {
-			$sql .= $comma." ".$filter['field']." ".$filter['is']." ".$database->dbquote($filter['value'])." ";
-		}
-	}
-	
-	if($result = $database->runQuery($sql.";"))
-	{
-		return $results;
-	}
-	return false;
-	
-}
-
-/**
  * Get values stored in this model in JSON format
  *
  * 
@@ -363,7 +215,14 @@ public function getData($data) {
  * @access public
  */
 public function getJSON() {
-	return json_encode($this->fields);
+
+    $fields = array_filter($this->fields,function($n){
+        if(!in_array($n,$this->protected_fields)){
+            return true;
+        }
+        return false;
+    });
+	return json_encode($fields);
 }
 
 }
