@@ -54,19 +54,21 @@ if(!$code || $code == ""){
 $framework->load('twaDebugger')->dump($_POST);
 
 if(file_exists($framework->systempath.DS.'webservices'.DS.$axn.".php")) {
-	
-	//Load the web-services file as defined in axn.
-	require_once $framework->systempath.DS.'webservices'.DS.$axn.".php";
-	
-	$path = str_replace('/','_',$axn);
-	
-	$class = 'twaWebServices_'.$path;
-	
-	$o = new $class(); //Get the class defined by axn.
-	
-	$o->$code();//Run the function as defined by code.
-	
+	try {
+        //Load the web-services file as defined in axn.
+        require_once $framework->systempath.DS.'webservices'.DS.$axn.".php";
 
+        $path = str_replace('/','_',$axn);
+
+        $class = 'twaWebServices_'.$path;
+
+        $o = new $class(); //Get the class defined by axn.
+
+        $o->$code();//Run the function as defined by code.
+    } catch(Exception $e){
+        handleException($e);
+        die('{"returnCode":1,"error":"Web Service Failed"}');
+    }
 } else {
 	die('{"returnCode":1,"error":"Web Service Not Found"}');
 }
