@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="737e71f1-8a71-466f-987c-6f6caa559706" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/system/webservices/framework/git.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/webservices/framework/auth.php" afterPath="$PROJECT_DIR$/system/webservices/framework/auth.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/webservices/framework/database.php" afterPath="$PROJECT_DIR$/system/webservices/framework/database.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/webservices/framework/debugger.php" afterPath="$PROJECT_DIR$/system/webservices/framework/debugger.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/webservices/framework/file.php" afterPath="$PROJECT_DIR$/system/webservices/framework/file.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/webservices/framework/language.php" afterPath="$PROJECT_DIR$/system/webservices/framework/language.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/config/globals.php" afterPath="$PROJECT_DIR$/system/config/globals.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/framework/twaWebServices.php" afterPath="$PROJECT_DIR$/system/framework/twaWebServices.php" />
     </list>
     <ignored path="twaframework.8.2.iws" />
@@ -33,6 +29,76 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="load.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/webservices/framework/load.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.695652" vertical-offset="168" max-vertical-offset="672">
+              <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="twitter.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/webservices/framework/twitter.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="868">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/1/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="3.0434783" vertical-offset="154" max-vertical-offset="658">
+              <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.608696" vertical-offset="168" max-vertical-offset="868">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="globals.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/config/globals.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.826087" vertical-offset="0" max-vertical-offset="630">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="htmlhead_begin.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/config/htmlhead_begin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.173913" vertical-offset="0" max-vertical-offset="966">
+              <caret line="20" column="57" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="57" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="twaWebServices.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/system/framework/twaWebServices.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5437882" vertical-offset="853" max-vertical-offset="2170">
+              <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="webservices.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webservices.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -43,103 +109,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="twaUser.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/framework/twaUser.php">
+      <file leaf-file-name="framework.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web_content/javascripts/framework/framework.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="16.52" vertical-offset="5712" max-vertical-offset="6244">
-              <caret line="349" column="22" selection-start-line="349" selection-start-column="22" selection-end-line="349" selection-end-column="22" />
-              <folding>
-                <element signature="e#6#142#0#PHP" expanded="true" />
-                <marker date="1429714445000" expanded="true" signature="1646:1741" placeholder="SELECT * FRO..." />
-                <marker date="1429714445000" expanded="true" signature="2395:2495" placeholder="SELECT * FRO..." />
-                <marker date="1429714445000" expanded="true" signature="2811:2852" placeholder="SELECT passw..#__user_social..." />
-                <marker date="1429714445000" expanded="true" signature="3482:3576" placeholder="SELECT * FRO..#__user_social..." />
-                <marker date="1429714445000" expanded="true" signature="4072:4102" placeholder="INSERT INTO ..." />
-                <marker date="1429714445000" expanded="true" signature="5571:5657" placeholder="SELECT * FRO..#__blocked_user_list..." />
-                <marker date="1429714445000" expanded="true" signature="5792:5836" placeholder="INSERT INTO ..." />
-                <marker date="1429714445000" expanded="true" signature="8449:8484" placeholder="SELECT * FRO..#__users..." />
-                <marker date="1429714445000" expanded="true" signature="8792:8878" placeholder="SELECT * FRO..#__blocked_user_list..." />
-                <marker date="1429714445000" expanded="true" signature="10702:10896" placeholder="SELECT a.gro..#__user_group..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="auth.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/webservices/framework/auth.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-168.60869" vertical-offset="0" max-vertical-offset="4130">
-              <caret line="283" column="4" selection-start-line="283" selection-start-column="4" selection-end-line="283" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1302" max-vertical-offset="7308">
+              <caret line="110" column="18" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="database.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/webservices/framework/database.php">
+      <file leaf-file-name="twaRoutes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/config/twaRoutes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-35.304348" vertical-offset="112" max-vertical-offset="1092">
-              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="debugger.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/webservices/framework/debugger.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="56.608696" vertical-offset="1638" max-vertical-offset="2142">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="file.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/webservices/framework/file.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.608696" vertical-offset="1049" max-vertical-offset="1568">
-              <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="general.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/webservices/framework/general.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="5.478261" vertical-offset="126" max-vertical-offset="630">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="602">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="image.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/webservices/framework/image.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1456">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="language.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/webservices/framework/language.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.391304" vertical-offset="28" max-vertical-offset="532">
-              <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="load.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/system/webservices/framework/load.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30555555" vertical-offset="168" max-vertical-offset="672">
-              <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -156,13 +140,15 @@
         <option value="$PROJECT_DIR$/system/framework/twaModel.php" />
         <option value="$PROJECT_DIR$/system/config/databases/twaFramework.sql" />
         <option value="$PROJECT_DIR$/system/framework/twaUser.php" />
-        <option value="$PROJECT_DIR$/system/framework/twaWebServices.php" />
         <option value="$PROJECT_DIR$/system/webservices/framework/auth.php" />
         <option value="$PROJECT_DIR$/system/webservices/framework/database.php" />
         <option value="$PROJECT_DIR$/system/webservices/framework/debugger.php" />
         <option value="$PROJECT_DIR$/system/webservices/framework/file.php" />
         <option value="$PROJECT_DIR$/system/webservices/framework/language.php" />
         <option value="$PROJECT_DIR$/system/webservices/framework/load.php" />
+        <option value="$PROJECT_DIR$/system/config/globals.php" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/system/framework/twaWebServices.php" />
       </list>
     </option>
   </component>
@@ -226,6 +212,60 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web_content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twaframework.8.2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twaframework.8.2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web_content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twaframework.8.2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twaframework.8.2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web_content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="framework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twaframework.8.2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twaframework.8.2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="system" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -235,6 +275,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="framework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twaframework.8.2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twaframework.8.2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twitter" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -285,6 +347,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twaframework.8.2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="twaframework.8.2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="1" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -417,46 +493,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/config/htmlhead_begin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="16.434782" vertical-offset="378" max-vertical-offset="966">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webservices.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1022">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/system/framework/twaWebServices.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1810344" vertical-offset="320" max-vertical-offset="2058">
-          <caret line="67" column="34" selection-start-line="67" selection-start-column="32" selection-end-line="67" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/system/framework/twaUser.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="16.52" vertical-offset="5712" max-vertical-offset="6244">
           <caret line="349" column="22" selection-start-line="349" selection-start-column="22" selection-end-line="349" selection-end-column="22" />
           <folding>
             <element signature="e#6#142#0#PHP" expanded="true" />
-            <marker date="1429714445000" expanded="true" signature="1646:1741" placeholder="SELECT * FRO..." />
-            <marker date="1429714445000" expanded="true" signature="2395:2495" placeholder="SELECT * FRO..." />
-            <marker date="1429714445000" expanded="true" signature="2811:2852" placeholder="SELECT passw..#__user_social..." />
-            <marker date="1429714445000" expanded="true" signature="3482:3576" placeholder="SELECT * FRO..#__user_social..." />
-            <marker date="1429714445000" expanded="true" signature="4072:4102" placeholder="INSERT INTO ..." />
-            <marker date="1429714445000" expanded="true" signature="5571:5657" placeholder="SELECT * FRO..#__blocked_user_list..." />
-            <marker date="1429714445000" expanded="true" signature="5792:5836" placeholder="INSERT INTO ..." />
-            <marker date="1429714445000" expanded="true" signature="8449:8484" placeholder="SELECT * FRO..#__users..." />
-            <marker date="1429714445000" expanded="true" signature="8792:8878" placeholder="SELECT * FRO..#__blocked_user_list..." />
-            <marker date="1429714445000" expanded="true" signature="10702:10896" placeholder="SELECT a.gro..#__user_group..." />
+            <marker date="1429714445000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1429714445000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
+            <marker date="1429714445000" expanded="true" signature="-1:-1" placeholder="SELECT passw..#__user_social..." />
+            <marker date="1429714445000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..#__user_social..." />
+            <marker date="1429714445000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1429714445000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..#__blocked_user_list..." />
+            <marker date="1429714445000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1429714445000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..#__users..." />
+            <marker date="1429714445000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..#__blocked_user_list..." />
+            <marker date="1429714445000" expanded="true" signature="-1:-1" placeholder="SELECT a.gro..#__user_group..." />
           </folding>
         </state>
       </provider>
@@ -519,8 +571,80 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/system/webservices/framework/load.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30555555" vertical-offset="168" max-vertical-offset="672">
+        <state vertical-scroll-proportion="-6.695652" vertical-offset="168" max-vertical-offset="672">
           <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/webservices/framework/twitter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="868">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/config/twaRoutes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="602">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.0434783" vertical-offset="154" max-vertical-offset="658">
+          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web_content/javascripts/framework/framework.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1302" max-vertical-offset="7308">
+          <caret line="110" column="18" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webservices.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1022">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/config/htmlhead_begin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.173913" vertical-offset="0" max-vertical-offset="966">
+          <caret line="20" column="57" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/config/globals.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.826087" vertical-offset="0" max-vertical-offset="630">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.608696" vertical-offset="168" max-vertical-offset="868">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/framework/twaWebServices.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5437882" vertical-offset="853" max-vertical-offset="2170">
+          <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
           <folding />
         </state>
       </provider>

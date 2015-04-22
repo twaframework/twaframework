@@ -9,12 +9,6 @@
  */
 
 
-
-
- if(!isset($_SESSION['_twa_auth_token'])) {
-	 $_SESSION['_twa_auth_token'] = md5(uniqid());
- }
- 
  $phpv = explode('.', PHP_VERSION);
  $phpi = $phpv[0] * 10000 + $phpv[1] * 100 + $phpv[2];
  

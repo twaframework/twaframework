@@ -80,7 +80,11 @@ public function authenticate($type) {
 				break;
 			}
 				
-		}
+		} else {
+            if(!isset($_SESSION['_twa_auth_token']) || $this->router->getPost('twa_token') != $_SESSION['_twa_auth_token']) {
+                $this->fail("Unauthorized Access");
+            }
+        }
 	} else if (isset($this->router->getRoutes()->service['default'])) {
 		if($this->router->getRoutes()->service['default']['access'] == AUTHORIZE_ALL) {
 			return;
@@ -100,7 +104,11 @@ public function authenticate($type) {
 					}
 				break;
 			}	
-		}
+		} else {
+            if(!isset($_SESSION['_twa_auth_token']) || $this->router->getPost('twa_token') != $_SESSION['_twa_auth_token']) {
+                $this->fail("Unauthorized Access");
+            }
+        }
 	}
 }
 /**

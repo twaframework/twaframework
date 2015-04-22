@@ -40,6 +40,11 @@ $model_paths = array();
 /*Initialize the Framework*/
 require_once BASE_PATH.'/system/framework/framework.php';
 require(BASE_PATH.'/system/config/version.php');
+
+if(!isset($_SESSION['_twa_auth_token'])) {
+    $_SESSION['_twa_auth_token'] = md5(uniqid());
+}
+
 //Declare global variables.
 require_once(BASE_PATH.'/system/config/globals.php');
 require_once(BASE_PATH.'/system/config/functions.php');
