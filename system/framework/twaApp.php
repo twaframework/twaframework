@@ -119,16 +119,17 @@ $config = $framework->load('twaConfig');
 if($config->maintenanceMode) {
 	$user = $framework->getUser();
 	if(!$user->isLoggedIn() || !in_array($user->fields['user_id'], $config->admin_accounts)) {
-		
 		header('Location:'.$this->siteurl."maintenance.php") ;
 	}
 } else {
 	
 	if(!$this->hasAccess()) {
 		$this->controller->unAuthorized();
+		return;
 	}
 }
 
+$this->controller->init();
 
 echo "<!DOCTYPE HTML>";
 echo "<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='".$this->language->config['code']."' lang='".$this->language->config['code']."' dir='".$this->language->config['dir']."' >";

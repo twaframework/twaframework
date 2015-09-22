@@ -1,4 +1,4 @@
-twaframework.8.1
+twaframework.8.3
 ================
 
 twaFramework Beta
@@ -6,10 +6,10 @@ twaFramework Beta
 
 Note: twaFramework is currently in beta so you may expect some bugs, issues or unfinished features.
 
-What's New In 8.2
+What's New In 8.3
 =================
 
-We have added some exciting new features to twaframework.8.2
+We have added some exciting new features to twaframework.8.3
 
 1.  You can now create end-points with your web-service requests.  In previous versions of twaframework, your ajax requests were always sent to http://yoursite.com/webservices.php and you had to define to $_POST variables 'axn' and 'code' to decide which method you want to run.  Now you can simply add the axn and code to the URL as shown below:
 	For e.g.  to call the login service you were using axn = "framework/auth" and code = "login", now you can simply call "http://yoursite.com/1/framework/auth/login"

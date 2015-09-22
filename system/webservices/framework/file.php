@@ -30,7 +30,6 @@ public function upload() {
 		
 		foreach($files as $file) {
 			$f = $router->getFile($file['param']);
-			$framework->load('twaDebugger')->dump($f);
 			$upload = new twaUpload($f);
 			$u = $upload->uploadTo($framework->basepath.DS.$file['destination']);
 			if($u !== FALSE) {	
@@ -44,7 +43,6 @@ public function upload() {
 	if($uploaded) {
 		$comma = "";
 		foreach($uploaded as $file) {
-			$framework->load('twaDebugger')->dump($file);
 			$url = $this->app->siteurl.$file->filename;
 			echo $comma.'{"original":"'.$file->original.'","path":"'.$file->path.'","extension":"'.$file->extension.'","filename":"'.$file->filename.'","partname":"'.$file->partname.'","url":"'.$url.'","fileid":"'.$this->router->getPost('fileid').'"}';
 			$comma = ",";

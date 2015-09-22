@@ -33,14 +33,38 @@
 global $model_paths;
 $model_paths = array(
 	'system/framework/',
+	'system/framework/core/',
+	'system/models/framework/',
 	'system/config/',
-    'system/config/databases/'
+    'system/config/databases/',
 );
 
 
 /*********** TO USE TWITTER LOGIN *************/
+/*
 define('TWITTER_CONSUMER_KEY', '');
 define('TWITTER_CONSUMER_SECRET', '');
 $model_paths[] ='system/models/twitter/';
+*/
+
+/*********** TO USE AMAZON WEB-SERVICES API *************/
+/*
+$mpath = BASE_PATH.DS.'system'.DS.'models'.DS;
+require $mpath.'aws.phar';
+$model_paths[] ='system/models/aws/';
+
+use Aws\Ses\SesClient;
+$ses = SesClient::factory(array(
+	'key'    => '',
+	'secret' => '',
+	'region'  => ''
+));
+
+use Aws\S3\S3Client;
+$s3 = S3Client::factory(array(
+	'key'    => '',
+	'secret' => ''
+));
+*/
 
 ?>

@@ -35,7 +35,6 @@ ini_set("display_errors", "1");
 
 $framework = null;
 $app = null;
-$analytics = null;
 $model_paths = array();
 /*Initialize the Framework*/
 require_once BASE_PATH.'/system/framework/framework.php';
@@ -53,7 +52,6 @@ spl_autoload_register('loadClasses'); //Ask the autoload register to use loadCla
 
 $framework = new twaFramework();
 $app = $framework->getApp('app');
-$analytics = new twaAnalytics();
 
 $framework->load('twaDebugger')->flushall(); //Empty Session Variables On Reload
 set_error_handler("handleError",E_ALL);

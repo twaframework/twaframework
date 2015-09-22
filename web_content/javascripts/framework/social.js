@@ -150,7 +150,7 @@ SocialLogins.prototype.initLinkedIn = function(){
 SocialLogins.prototype.initTwitter = function(){
 	var me = this;
 	if(typeof _GET['network'] !== 'undefined' && _GET['network'] == 'twitter'){
-		me.getTwitterData();	
+		me.completeTwitterLogin();
 	} else {
 		me.properties.twitter['status'] = 'initialized';
 	}
@@ -210,7 +210,7 @@ SocialLogins.prototype.loginWithTwitter = function(){
 	});
 }
 
-SocialLogins.prototype.getTwitterData = function(){
+SocialLogins.prototype.completeTwitterLogin = function(){
 	var me = this;
 	$framework.request({
 		"axn":"framework/twitter",
@@ -295,7 +295,68 @@ SocialLogins.prototype.loginWithLinkedIn = function(){
 			$.event.trigger("linkedInDataRetrieved",obj);
 		});	
 	}
-}
+};
+
+SocialLogins.prototype.getFBData = function(){
+    var me = this;
+    FB.login(function(obj) {
+        if (obj.authResponse) {
+            FB.api('/me', {fields: "id, first_name, last_name, email, picture"}, function(obj) {
+                $.event.trigger("fbDataRetrieved",obj);
+            });
+
+        }
+    },{scope: me.properties.facebook.scope});
+};
+
+SocialLogins.prototype.getLinkedInData = function(){
+    var me = this;
+    if(IN.User.isAuthorized() === true){
+        var fields = ['id',
+            'first-name',
+            'last-name',
+            'email-address',
+            'picture-url'];
+        IN.API.Profile("me").fields(fields).result(function(obj){
+            $.event.trigger("linkedInDataRetrieved",obj);
+        });
+    }
+};
+
+
+SocialLogins.prototype.getGPlusData = function(){
+    var me = this;
+    gapi.auth.authorize({
+        client_id: me.properites.gplus.client_id,
+        scope: me.properites.gplus.scope,
+        immediate: true,
+        cookie_policy: 'single_host_origin'
+    }, function(obj){
+        //	console.log("check logged in", obj);
+        if(obj && obj.status && obj.status.signed_in && obj.status.signed_in === true){
+            gapi.client.load('oauth2', 'v2', function(){
+                var gplusObj = gapi.client.oauth2.userinfo.get();
+                gplusObj.execute(function(obj){
+                    $.event.trigger("gPlusDataRetrieved", obj);
+                });
+            });
+        }
+    });
+};
+
+
+SocialLogins.prototype.getTwitterData = function(){
+    var me = this;
+    $framework.request({
+        "axn":"framework/twitter",
+        "code":"getdata",
+        "oauth_token":_GET['oauth_token'],
+        "oauth_verifier":_GET['oauth_verifier']
+    },function(obj){
+        me.properties.twitter.friends = obj.friends;
+        $.event.trigger("twitterDataRetrieved", obj.content);
+    });
+};
 
 
 SocialLogins.prototype.appLogin = function(obj){

@@ -10,19 +10,12 @@
 defined('_TWACHK') or die;
 
 
-class twaController_default extends twaController { 
-	
-	public function __construct(){
+class twaController_default extends twaController {
+
+	public function __construct() {
 		parent::__construct();
-		
-		global $framework;
-		$this->data['user'] = $framework->getUser();
-		if($this->data['user']->isLoggedIn()){
-			
-		}
 	}
+
 }
-
-
 
 ?>

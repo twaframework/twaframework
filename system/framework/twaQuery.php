@@ -108,10 +108,10 @@ public function limit($limit = array()){
 public function execute(){
 	if($this->type == 'select') {
 		$sql = "SELECT ";
-		if($fields){
-			$commma ="";
-			foreach($fields as $field){
-				$commma = ",";
+		if($this->fields){
+			$comma ="";
+			foreach($this->fields as $field){
+				$comma = ",";
 				$sql .= $comma.$field;
 			}
 		} else {
@@ -136,7 +136,7 @@ public function execute(){
 		if($this->limit != "") {
 			$sql .= " LIMIT ".$this->limit." ";
 		}
-	} else if($type == "insert"){
+	} else if($this->type == "insert"){
 		$sql = "INSERT INTO ";
 		$sql .= " ".$this->tablename." SET ";
 		if($this->values) {
@@ -146,7 +146,7 @@ public function execute(){
 					$comma = ",";
 			}
 		}
-	} else if($type == "UPDATE"){
+	} else if($this->type == "UPDATE"){
 		$sql = "UPDATE ";
 		$sql .= " ".$this->tablename." SET ";
 		if($this->values) {
@@ -164,10 +164,7 @@ public function execute(){
 			}
 		}
 	}
-	
-	global $framework;
-    global $app;
-	
+
 	$r = $this->db->runQuery($sql);
 	return $r;
 }

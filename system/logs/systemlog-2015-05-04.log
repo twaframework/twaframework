@@ -1,0 +1,12 @@
+2015-05-04 10:26 8 Undefined index: home in file /SugarSync/Web/twaframework.8.2/system/framework/twaApp.php on Line 178
+2015-05-04 10:26 8 Undefined property: twaConfig::$twa_API_KEY in file /SugarSync/Web/twaframework.8.2/system/framework/twaAnalytics.php on Line 27
+2015-05-04 10:26 8 Undefined index: home in file /SugarSync/Web/twaframework.8.2/system/framework/twaController.php on Line 130
+2015-05-04 10:26 8 Undefined property: twaConfig::$twa_API_KEY in file /SugarSync/Web/twaframework.8.2/web_content/pages/home/home.php on Line 59
+2015-05-04 10:26 8 Undefined property: twaConfig::$twa_API_KEY in file /SugarSync/Web/twaframework.8.2/web_content/pages/home/home.php on Line 61
+2015-05-04 10:26 8 Undefined property: twaConfig::$twa_API_KEY in file /SugarSync/Web/twaframework.8.2/web_content/pages/home/home.php on Line 64
+2015-05-04 10:26 8 Undefined index: home in file /SugarSync/Web/twaframework.8.2/system/framework/twaApp.php on Line 178
+2015-05-04 10:26 8 Undefined property: twaConfig::$twa_API_KEY in file /SugarSync/Web/twaframework.8.2/system/framework/twaAnalytics.php on Line 27
+2015-05-04 10:26 8 Undefined index: home in file /SugarSync/Web/twaframework.8.2/system/framework/twaController.php on Line 130
+2015-05-04 10:26 8 Undefined property: twaConfig::$twa_API_KEY in file /SugarSync/Web/twaframework.8.2/web_content/pages/home/home.php on Line 59
+2015-05-04 10:26 8 Undefined property: twaConfig::$twa_API_KEY in file /SugarSync/Web/twaframework.8.2/web_content/pages/home/home.php on Line 61
+2015-05-04 10:26 8 Undefined property: twaConfig::$twa_API_KEY in file /SugarSync/Web/twaframework.8.2/web_content/pages/home/home.php on Line 64
