@@ -185,7 +185,6 @@ class _CoreRouter {
 	}
 
 	public function setWebServiceRoute() {
-		global $framework;
 		$axn = $this->components[1] . "/" . $this->components[2];
 
 		if ($this->isWebService($axn)) {

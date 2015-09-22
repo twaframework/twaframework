@@ -14,7 +14,7 @@ function SocketConnection($datastring) {
 	this.messageHandler = function(message) {};
 	
 	this.onMessage = function(message){
-		console.debug(message);
+		$framework.debug(message);
 		if($.inArray(message.id,me.mguids) !== -1) {
 			return;
 		} else {

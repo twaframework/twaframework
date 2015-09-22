@@ -11,11 +11,10 @@ session_start(); // Start Session
 error_reporting(E_ALL);
 date_default_timezone_set('UTC');
 
-ini_set("display_errors", "1");
+ini_set("display_errors", "0");
 
 $framework = null;
 $app = null;
-$analytics = null;
 
 /*Initialize the Framework*/
 require_once BASE_PATH.'/system/framework/framework.php';
@@ -28,10 +27,13 @@ spl_autoload_register('loadClasses');//Ask the autoload register to use loadClas
 
 $framework = new twaFramework();
 $app = $framework->getApp('app');
-$analytics = new twaAnalytics();
 $router = $framework->load('twaRouter');
-$router->parseWebService();
-
+if(!$router->parse()) {
+    $router->setWebServiceRoute();
+} else {
+    echo json_encode(array("returnCode" => 1, "error" => "No Web Service Found"));
+    die();
+}
 set_error_handler("handleError",E_ALL);
 
 $class = $router->getFromURL('class');

@@ -21,6 +21,7 @@ var today = new Date();
 
 function twaObject() {
 	var me = this;
+	me.enable_logging = true;
 	this.errorMessage = "";
 }
 
@@ -34,8 +35,10 @@ twaObject.prototype.onJSONParseError = function(html,onError){
 	}
 };
 
-twaObject.prototype.debug = function(text,object) { 
-	console.debug(text,object);
+twaObject.prototype.debug = function(text,object) {
+	if(me.enable_logging == true) {
+		console.debug(text,object);
+	}
 };
 
 twaObject.prototype.onAJAXError = function(xhr,datastring,onError){
@@ -120,27 +123,19 @@ twaObject.prototype.request = function(data, onSuccess, onError) {
 		success: function($html) {
 			
 			$html = $html.replace(/\n/g, '');
-			if(typeof $twaDebugger !== 'undefined') {
-				$twaDebugger.reload();
-			}
+
 			try {
 				if(typeof $html == 'string') {
 					$response = $.parseJSON($html);
 				} else if(typeof $html == 'object') {
 					$response = $html;
 				} else {
-					if(typeof $twaDebugger !== 'undefined') {
-						$twaDebugger.log($html);
-					}
 					me.onJSONParseError($html,onError);
 					
 					return;
 				}
 				
 			} catch(e) {
-				if(typeof $twaDebugger !== 'undefined') {
-					$twaDebugger.log($html);
-				}
 				me.onJSONParseError($html,onError);
 				return;
 			}
@@ -152,9 +147,6 @@ twaObject.prototype.request = function(data, onSuccess, onError) {
 				// Success
 			} else {
 				//Failure
-				if(typeof $twaDebugger !== 'undefined') {
-					$twaDebugger.log(JSON.stringify($response));
-				}
 				if(typeof onError == 'function') {
 					onError($response);
 				} else {
@@ -164,9 +156,6 @@ twaObject.prototype.request = function(data, onSuccess, onError) {
 		
 		},
 		error: function(xhr, error) {
-			if(typeof $twaDebugger !== 'undefined') {
-				$twaDebugger.reload();
-			}
 			me.onAJAXError(xhr,$datastring,onError);
 		}
 	});
@@ -177,9 +166,7 @@ twaObject.prototype.load = function(data, onSuccess, onError) {
 		url: $baseurl+'webservices.php'
 	};		
 	$.extend($datastring, data);
-	if(typeof $twaDebugger !== 'undefined') {
-		$twaDebugger.log(JSON.stringify($datastring));
-	}
+	me.debug("Web Request: "+$datastring.axn+'/'+$datastring.code,$datastring);
 	var me = this;
 	$.ajax({
 		type: 'POST',
@@ -187,6 +174,7 @@ twaObject.prototype.load = function(data, onSuccess, onError) {
 		data: $datastring,
 		cache: false,
 		success: function($html) {
+			me.debug("Web Response: "+$datastring.axn+'/'+$datastring.code,"Success");
 			if(typeof onSuccess === 'function') {
 				onSuccess($html);
 			}
@@ -203,7 +191,7 @@ twaObject.prototype.modal = function(data,onLoad){
 	var properties = {
 		"axn":"framework/load",
 		"code":"component"
-	}
+	};
 	
 	$.extend(properties,data);
 	
@@ -259,7 +247,7 @@ twaObject.prototype.clean = function(val){
     val = val.replace(/'/gi,'&rsquo;');
     val = val.replace(/"/gi,'&rdquo;');
     return val;
-}
+};
 
 twaObject.prototype.validate = function(form,properties,onSuccess, onError){
 	var success = onSuccess || function(){};
@@ -269,7 +257,7 @@ twaObject.prototype.validate = function(form,properties,onSuccess, onError){
 		elementOnly: false,
 		errorClass: 'input-error',
 		errorMessageClass: 'under-error'
-	}
+	};
 	
 	$.extend(settings, properties);
 	
@@ -480,19 +468,16 @@ twaObject.prototype.validate = function(form,properties,onSuccess, onError){
 	}
 	
 
-}
+};
+
 Array.prototype.remove = function(v) { this.splice(this.indexOf(v) == -1 ? this.length : this.indexOf(v), 1); }
 
-function S4() {   
-
-   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);   
-
+function S4() {
+   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
 }   
 
-function guid() {   
-
-   return (S4()+S4()+""+S4()+""+S4()+""+S4()+""+S4()+S4()+S4());   
-
+function guid() {
+   return (S4()+S4()+""+S4()+""+S4()+""+S4()+""+S4()+S4()+S4());
 }  
 
 if (typeof Object.keys !== "function") {
