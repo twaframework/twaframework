@@ -1,3 +1,3 @@
 <?php 
-	define('TWA_VERSION', '8.3');
+	define('TWA_VERSION', '9.0');
 ?>
