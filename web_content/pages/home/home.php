@@ -20,7 +20,7 @@
 		$('.config-db').click(function(){
 			$framework.request({
 				"axn":"framework/database",
-				"code":"createtables",
+				"code":"runSQL",
 				"db":"default",
 				"filename":'system/config/databases/twaFramework.sql'
 			},function(r){

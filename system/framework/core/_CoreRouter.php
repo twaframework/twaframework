@@ -132,7 +132,7 @@ class _CoreRouter {
 
 		if(!isset($this->param['controller']) && !isset($this->param['view'])){
 			$c = $this->getRoutes()->controllers['default'];
-			$v = $this->getRoutes()->pages[$c]['name'];
+			$v = isset($this->getRoutes()->pages[$c])?$this->getRoutes()->pages[$c]['name']:false;
 			if(!$v) {
 				$v = $this->getRoutes()->pages['default']['name'];
 			}
@@ -149,7 +149,7 @@ class _CoreRouter {
 			}
 
 		} else if (isset($this->param['controller'])) {
-			$v = $this->getRoutes()->pages[$this->param['controller']]['name'];
+			$v = isset($this->getRoutes()->pages[$this->param['controller']])?$this->getRoutes()->pages[$this->param['controller']]['name']:false;
 			if(!$v) {
 				$v = $this->getRoutes()->pages['default']['name'];
 			}
@@ -159,7 +159,7 @@ class _CoreRouter {
 				handleError("404","Unable to find view",$v,"0");
 			}
 		} else if (isset($this->param['view'])) {
-			$c = $this->getRoutes()->controllers[$this->param['view']];
+			$c = isset($this->getRoutes()->controllers[$this->param['view']])?$this->getRoutes()->controllers[$this->param['view']]:false;
 			if(!$c) {
 				$c = $this->getRoutes()->controllers['default'];
 			}

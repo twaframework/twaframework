@@ -36,7 +36,6 @@ spl_autoload_register('loadClasses');//Ask the autoload register to use loadClas
 
 $framework = new twaFramework();
 $app = $framework->getApp('app');
-$analytics = new twaAnalytics();
 
 set_error_handler("handleError",E_ALL);
 

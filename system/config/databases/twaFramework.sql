@@ -130,8 +130,6 @@ CREATE TABLE `#__basic_auth` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
-
 # Dump of table #__blocked_users_list
 # ------------------------------------------------------------
 
@@ -139,7 +137,7 @@ DROP TABLE IF EXISTS `#__blocked_users_list`;
 
 CREATE TABLE `#__blocked_users_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) DEFAULT NULL
+  `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -159,8 +157,6 @@ CREATE TABLE `#__user_social` (
   `last_updated_on` datetime DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

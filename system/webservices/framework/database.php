@@ -14,7 +14,7 @@ class twaWebServices_framework_database extends twaWebServices {
  * Runs a SQL file on the server
  * Run a SQL file specified in the filename key.
  * POST variables must specify the filename and the db
- * 
+ * NOTE:  The file is deleted after it has been executed.
  * @return String A JSON string is returned with "returnCode" = 0 if successful, and 1 on error.
  * @access public
  */
@@ -30,6 +30,7 @@ public function runSQL() {
 		$this->fail(108,"Unable to run file");
 		
 	} else {
+		unlink(BASE_PATH.DS.$router->getPost('filename'));
 		echo '{"returnCode":0}';	
 	}
 }

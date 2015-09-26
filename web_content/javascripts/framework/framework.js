@@ -36,7 +36,7 @@ twaObject.prototype.onJSONParseError = function(html,onError){
 };
 
 twaObject.prototype.debug = function(text,object) {
-	if(me.enable_logging == true) {
+	if(this.enable_logging == true) {
 		console.debug(text,object);
 	}
 };
@@ -162,8 +162,10 @@ twaObject.prototype.request = function(data, onSuccess, onError) {
 }
 
 twaObject.prototype.load = function(data, onSuccess, onError) {
+	var me = this;
 	var $datastring = {
-		url: $baseurl+'webservices.php'
+		url: $baseurl+'webservices.php',
+		"twa_token": $authtoken
 	};		
 	$.extend($datastring, data);
 	me.debug("Web Request: "+$datastring.axn+'/'+$datastring.code,$datastring);
