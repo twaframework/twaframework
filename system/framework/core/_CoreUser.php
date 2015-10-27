@@ -154,6 +154,24 @@ class _CoreUser extends twaModel {
 		return array();
 	}
 
+	public function isSocialLogin() {
+		global $framework;
+		$db = $framework->getDB();
+		$sql = "SELECT user_id, fb_id, gplus_id, twitter_id, linkedin_id, password  FROM #__user_social WHERE user_id = ".$db->dbquote($this->fields['user_id']);
+		$result = $db->runQuery($sql.";");
+
+		if($result){
+			if($result[0]->password != ""){
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		return false;
+
+	}
+
 	public function saveSocialProfile($data){
 		global $framework;
 		global $app;
@@ -409,6 +427,8 @@ class _CoreUser extends twaModel {
 			return TRUE;
 		}
 		else {
+			unset($_SESSION['twatoken']);
+			unset($_SESSION['twaUserID']);
 			return FALSE;
 		}
 

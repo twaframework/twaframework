@@ -41,7 +41,7 @@ var $authtoken = '<?php echo $_SESSION['_twa_auth_token']; ?>';
 <script type='text/javascript' src="<?php echo $app->siteurl; ?>web_content/javascripts/framework/socket.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 <script>
-	var $user = new User(<?php echo $user->fields['user_id']; ?>,<?php  if($user->isLoggedIn()){ echo 'true';} else { echo 'false'; }; ?>);
+	var $user = new User('<?php echo $user->fields['user_id']; ?>',<?php  if($user->isLoggedIn()){ echo 'true';} else { echo 'false'; }; ?>);
 	<?php  if($user->isLoggedIn()){
 	?>
 		$user.fields = <?php echo $user->getJSON(); ?>;

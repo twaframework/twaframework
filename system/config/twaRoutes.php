@@ -33,7 +33,7 @@ public function __construct() {
 									"name"=>"home",
 									"access"=>AUTHORIZE_ALL,
 									"layout"=>"default",
-									"title"=>"Park-O-Next | Home",
+									"title"=>"TWAFramework | Home",
 									"keywords"=>"",
 									"description"=>""
 								  );

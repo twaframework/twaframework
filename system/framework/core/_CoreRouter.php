@@ -176,7 +176,8 @@ class _CoreRouter {
 		$this->fields = array();
 		if($this->components){
 			foreach($this->components as $component){
-				if($component != $this->param['controller'] && $component != $this->param['view']) {
+
+				if($component != "" && $component != $this->param['controller'] && $component != $this->param['view']) {
 					$f = explode("/",$component);
 					$this->fields = array_merge($this->fields,$f);
 				}

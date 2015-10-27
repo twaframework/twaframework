@@ -11,10 +11,13 @@ function twaUploader(id , data){
     this.properties = {
         destination: "images/temp/",
         allowed_types: [],
-        allowed_extensions: []
+        allowed_extensions: [],
         //allowed_types: ['image/jpeg','image/jpg','image/png','image/gif','application/msword','application/vnd.ms-powerpoint','application/pdf','application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/vnd.openxmlformats-officedocument.presentationml.presentation','application/vnd.openxmlformats-officedocument.presentationml.slideshow','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','multipart/x-zip'],
         //allowed_extensions: ['.jpg','.jpeg','.png','.gif','.pdf','.zip','.xls','.xlsx','.doc','.docx','.txt','.ppt','.pptx','.pps','.ppsx']
-    }
+        onError: function(x){
+            unitiques.showError(unitiques.getError(x));
+        }
+    };
 
     $.extend(this.properties, data);
     this.init();
@@ -28,6 +31,7 @@ twaUploader.prototype.init = function(){
     console.debug(me.properties);
     if(typeof me.properties.upload_button != 'undefined'){
         me.properties.upload_button.click(function(){
+
             me.properties.input.click();
         });
     }
@@ -48,9 +52,14 @@ twaUploader.prototype.init = function(){
             ]
         },
         error: function(err, file) {
+            var name = file.name.replace(/[\. ,:-]+/g, "-");
             if(typeof me.onError == 'function'){
-                me.onError(err);
+                me.onError({
+                    errorCode: err,
+                    name: name
+                });
             }
+
         },
         allowedfiletypes: me.properties.allowed_types,
         allowedfileextensions: me.properties.allowed_extensions,
@@ -83,7 +92,7 @@ twaUploader.prototype.init = function(){
                     me.properties.onUploadComplete(response,file);
                 }
             } else {
-                me.onError(response);
+                me.onError(response.errorCode);
                 console.debug("Upload Failed",response);
             }
         },
@@ -106,11 +115,7 @@ twaUploader.prototype.init = function(){
                             done();
                         } else {
                             if (typeof onError == 'function') {
-                                onError({
-                                    errorCode: 215,
-                                    error: "Image Too Small",
-                                    returnCode: 1
-                                });
+                                onError("ImageTooSmall");
                             }
                         }
                     };
@@ -123,7 +128,7 @@ twaUploader.prototype.init = function(){
             }
         }
     });
-}
+};
 
 twaUploader.prototype.upload_to_cdn = function(data,onSuccess, onError){
     $framework.request({
@@ -141,7 +146,7 @@ twaUploader.prototype.upload_to_cdn = function(data,onSuccess, onError){
             onError(x);
         }
     });
-}
+};
 
 twaUploader.prototype.onError = function(x){
     var me = this;
@@ -149,7 +154,7 @@ twaUploader.prototype.onError = function(x){
     if(typeof me.properties.onError == 'function'){
         me.properties.onError(x);
     }
-}
+};
 
 function ImageUploader(id, data){
     this.id = id;
@@ -159,7 +164,7 @@ function ImageUploader(id, data){
         allowed_extensions: ['.jpg','.jpeg','.png','.gif'],
         min_width: 0,
         min_height: 0
-    }
+    };
     $.extend(this.properties, data);
     this.init();
 }
@@ -184,10 +189,10 @@ ImageUploader.prototype.write_image = function(data,onSuccess, onError){
     });
 };
 
-ImageUploader.prototype.write_image = function(data,onSuccess, onError){
+ImageUploader.prototype.resize = function(data,onSuccess, onError){
     var d = {
         "axn":"framework/image",
-        "code":"write",
+        "code":"resize",
         "format":"jpeg"
     };
     $.extend(d,data);

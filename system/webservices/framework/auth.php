@@ -251,8 +251,8 @@ public function signup() {
 	
 	
 	$newuser->Login($data);
-	
-	echo '{"returnCode":0,"user":'.json_encode($newuser->fields).'}';	
+
+	echo '{"returnCode":0,"user":'.json_encode($newuser->fields).',"social":'.json_encode($newuser->social()).'}';
 }
 /**
  * To check if an email exists.

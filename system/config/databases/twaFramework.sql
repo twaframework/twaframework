@@ -147,7 +147,7 @@ CREATE TABLE `#__blocked_users_list` (
 DROP TABLE IF EXISTS `#__user_social`;
 
 CREATE TABLE `#__user_social` (
-  `user_id` VARCHAR (255) unsigned NOT NULL,
+  `user_id` VARCHAR (255) NOT NULL,
   `fb_id` varchar(255) DEFAULT NULL,
   `gplus_id` varchar(255) DEFAULT NULL,
   `twitter_id` varchar(255) DEFAULT NULL,

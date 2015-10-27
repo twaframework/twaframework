@@ -93,7 +93,7 @@ function SocialLogins(data) {
 		"appLogin":{
 			
 		}
-	}
+	};
 	
 	$.extend(this.properties,data);
 	
@@ -117,7 +117,7 @@ SocialLogins.prototype.init = function(){
 		this.initGPlus();
 	}
 	
-}
+};
 
 
 SocialLogins.prototype.initGPlus = function(){
@@ -127,7 +127,7 @@ SocialLogins.prototype.initGPlus = function(){
 		return;
 	}
 	me.properties.gplus['status'] = 'initialized';
-}
+};
 
 SocialLogins.prototype.initFB = function(){
 	var me = this;
@@ -136,7 +136,7 @@ SocialLogins.prototype.initFB = function(){
 		return;
 	}
 	me.properties.facebook['status'] = 'initialized';
-}
+};
 
 SocialLogins.prototype.initLinkedIn = function(){
 	var me = this;
@@ -145,7 +145,7 @@ SocialLogins.prototype.initLinkedIn = function(){
 		return;
 	}
 	me.properties.linkedin['status'] = 'initialized';
-}
+};
 
 SocialLogins.prototype.initTwitter = function(){
 	var me = this;
@@ -154,7 +154,7 @@ SocialLogins.prototype.initTwitter = function(){
 	} else {
 		me.properties.twitter['status'] = 'initialized';
 	}
-}
+};
 
 SocialLogins.prototype.getFriendsList = function(network,onComplete){
 	var me = this;
@@ -197,7 +197,7 @@ SocialLogins.prototype.getFriendsList = function(network,onComplete){
 		break
 	}
 	
-}
+};
 
 SocialLogins.prototype.loginWithTwitter = function(){
 	var me = this;
@@ -208,7 +208,7 @@ SocialLogins.prototype.loginWithTwitter = function(){
 	},function(obj){
 		window.open(obj.url);
 	});
-}
+};
 
 SocialLogins.prototype.completeTwitterLogin = function(){
 	var me = this;
@@ -227,7 +227,7 @@ SocialLogins.prototype.completeTwitterLogin = function(){
 		$.event.trigger("twitterDataRetrieved", obj.content);
 		me.properties.twitter.friends = obj.friends;
 	});
-}
+};
 
 
 SocialLogins.prototype.loginWithGPlus = function(){
@@ -255,7 +255,7 @@ SocialLogins.prototype.loginWithGPlus = function(){
 			});
 		}
 	});
-}
+};
 
 SocialLogins.prototype.loginWithFB = function(){
 	var me = this;
@@ -274,7 +274,7 @@ SocialLogins.prototype.loginWithFB = function(){
 			
 		 }
 	},{scope: me.properties.facebook.scope});
-}
+};
 
 SocialLogins.prototype.loginWithLinkedIn = function(){
 	var me = this;
@@ -364,7 +364,7 @@ SocialLogins.prototype.appLogin = function(obj){
 	var properties = {
 		"axn":"framework/auth",
 		"code":"socialLogin"
-	}
+	};
 	$.extend(properties,social_config.appLogin);
 	$.extend(properties,obj);
 	
@@ -381,7 +381,7 @@ SocialLogins.prototype.appLogin = function(obj){
 		}
 		
 	});
-}
+};
 
 SocialLogins.prototype.loadFB = function(){
   var me = this;	
@@ -402,14 +402,14 @@ SocialLogins.prototype.loadFB = function(){
   js = document.createElement('script'); js.id = 'facebook-jssdk';
   js.src = "//connect.facebook.net/en_US/sdk.js";
   fjs.parentNode.insertBefore(js, fjs);
-}
+};
 
 SocialLogins.prototype.loadGPlus = function(){
 	var htmlStr = "<script src='https://apis.google.com/js/client.js?onload=googlePlusLoaded'>";
 	$("head").append(htmlStr);
 	var me = this;
 	me.initGPlus();
-}
+};
 
 SocialLogins.prototype.loadLinkedIn = function(){
 	var me = this;
@@ -420,7 +420,7 @@ SocialLogins.prototype.loadLinkedIn = function(){
 	htmlStr += "authorize: true \n";
 	htmlStr += "</script>";
 	$("head").append(htmlStr);
-}
+};
 
 
 var social = new SocialLogins(social_config);

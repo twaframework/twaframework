@@ -14,7 +14,7 @@ Function.prototype.inheritsFrom = function( parentClassOrObject ){
 		this.prototype.parentclass = parentClassOrObject;
 	} 
 	return this;
-} 
+};
 
 var jsScripts = [];
 var today = new Date();
@@ -77,7 +77,7 @@ twaObject.prototype.onError = function(code,message,extra){
 		me.debug("Extra ",extra);
 	}
 	$.event.trigger("frameworkError",{ code: code, message:message, extra:extra});
-}
+};
 
 twaObject.prototype.onValidationError = function(fields){
 	var me = this;
@@ -92,7 +92,7 @@ twaObject.prototype.onValidationError = function(fields){
 		me.onError(200, message,fields);
 	}
 	
-}
+};
 
 twaObject.prototype.globalsettings = function(onSuccess){
 	var me = this;
@@ -105,7 +105,7 @@ twaObject.prototype.globalsettings = function(onSuccess){
 		me.settings = data;	
 		onSuccess(me.settings);
 	});
-}
+};
 
 twaObject.prototype.request = function(data, onSuccess, onError) {
 	var me = this;
@@ -159,7 +159,7 @@ twaObject.prototype.request = function(data, onSuccess, onError) {
 			me.onAJAXError(xhr,$datastring,onError);
 		}
 	});
-}
+};
 
 twaObject.prototype.load = function(data, onSuccess, onError) {
 	var me = this;
@@ -169,7 +169,6 @@ twaObject.prototype.load = function(data, onSuccess, onError) {
 	};		
 	$.extend($datastring, data);
 	me.debug("Web Request: "+$datastring.axn+'/'+$datastring.code,$datastring);
-	var me = this;
 	$.ajax({
 		type: 'POST',
 		url: $datastring.url,
@@ -185,7 +184,7 @@ twaObject.prototype.load = function(data, onSuccess, onError) {
 			me.onAJAXError(xhr,$datastring,onError);
 		}
 	});
-}
+};
 
 twaObject.prototype.modal = function(data,onLoad){
 	var me = this;
@@ -207,7 +206,7 @@ twaObject.prototype.modal = function(data,onLoad){
 			onLoad();	
 		}
 	});
-}
+};
 
 twaObject.prototype.loadLater = function(onLoad){
 	$.each(jsScripts,function(i,script){
@@ -220,7 +219,7 @@ twaObject.prototype.loadLater = function(onLoad){
 			onLoad();
 		}
 	},200);
-}
+};
 
 twaObject.prototype.screen = function(){
 	var myWidth = 0, myHeight = 0;
@@ -241,7 +240,7 @@ twaObject.prototype.screen = function(){
 		height: myHeight,
 		width: myWidth
 	}
-}
+};
 
 twaObject.prototype.clean = function(val){
     val = val.replace(/[`\{\}\\\<\>]/gi,'');
@@ -249,6 +248,16 @@ twaObject.prototype.clean = function(val){
     val = val.replace(/'/gi,'&rsquo;');
     val = val.replace(/"/gi,'&rdquo;');
     return val;
+};
+
+twaObject.prototype.removeHTML = function(val){
+	if(!val || val == ""){
+		return val;
+	}
+	val = val.replace(/<br\s*[\/]?>/gi, "\n");
+	val = val.replace(/\&rsquo\;/gi,"'");
+	val = val.replace(/\&rdquo\;/gi,'"');
+	return val;
 };
 
 twaObject.prototype.validate = function(form,properties,onSuccess, onError){
@@ -432,6 +441,18 @@ twaObject.prototype.validate = function(form,properties,onSuccess, onError){
 			}
 		}
 	});
+
+	form.find('.vamount').each(function(){
+		if(!settings.elementOnly||(settings.elementOnly&&$(this).attr('id')== settings.element))
+		{
+			$pattern = /^(0|[1-9][0-9]*)(\.\d{1,2})?$/;
+			$value = $(this).val();
+			if($pattern.test($value)===false && $value != '') {
+				$(this).addClass(settings.errorClass);
+				errorFields.push({field: $(this), type: 'vamount', error: 'Please enter a valid amount.'});
+			}
+		}
+	});
 	  	
 	form.find('.vzip').each(function(){
 	if(!settings.elementOnly||(settings.elementOnly&&$(this).attr('id')== settings.element))
@@ -469,6 +490,36 @@ twaObject.prototype.validate = function(form,properties,onSuccess, onError){
 		success();
 	}
 	
+
+};
+
+twaObject.prototype.isCapslockOn = function(e){
+
+	e = (e) ? e : window.event;
+
+	var charCode = false;
+	if (e.which) {
+		charCode = e.which;
+	} else if (e.keyCode) {
+		charCode = e.keyCode;
+	}
+
+	var shifton = false;
+	if (e.shiftKey) {
+		shifton = e.shiftKey;
+	} else if (e.modifiers) {
+		shifton = !!(e.modifiers & 4);
+	}
+
+	if (charCode >= 97 && charCode <= 122 && shifton) {
+		return true;
+	}
+
+	if (charCode >= 65 && charCode <= 90 && !shifton) {
+		return true;
+	}
+
+	return false;
 
 };
 
