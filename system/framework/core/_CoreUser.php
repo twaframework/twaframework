@@ -9,8 +9,9 @@ defined('_TWACHK') or die;
 
 class _CoreUser extends twaModel {
 
-	public function onError($error) {
+	public function onError($error, $errorCode = 201) {
 		$this->error = $error;
+		$this->errorCode = $errorCode;
 	}
 	/**
 	 * Starting point for twaUser.
@@ -118,7 +119,7 @@ class _CoreUser extends twaModel {
 	public static function getSocialPassword($data){
 		global $framework;
 		$db = $framework->getDB();
-		$sql = "SELECT password FROM #__user_social WHERE ";
+		$sql = "SELECT password FROM #__user_social WHERE password IS NOT NULL AND password <> '' AND ";
 		if(isset($data['fb_id'])){
 			$sql .= " fb_id = ".$db->dbquote($data['fb_id'])." ";
 		} else if (isset($data['gplus_id'])){
@@ -133,7 +134,7 @@ class _CoreUser extends twaModel {
 
 		$result = $db->runQuery($sql.";");
 
-		if($result){
+		if($result && $result[0]->password !== ""){
 			return $result[0]->password;
 		}
 
@@ -321,7 +322,7 @@ class _CoreUser extends twaModel {
 		$r = $database->runQuery($sql . ";");
 		if ($r !== FALSE) {
 			if(isset($data['email']) && $this->isLoggedIn()) {
-				$authcode = md5($data['email']);
+				$authcode = md5(strtolower($data['email']));
 				$_SESSION['twatoken'] = $authcode;
 			}
 			$this->Load();
@@ -400,7 +401,7 @@ class _CoreUser extends twaModel {
             }
 
             if(isset($data['email']) && $this->isLoggedIn()) {
-                $authcode = md5($data['email']);
+                $authcode = md5(strtolower($data['email']));
                 $_SESSION['twatoken'] = $authcode;
             }
 
@@ -423,10 +424,9 @@ class _CoreUser extends twaModel {
 	 */
 	public function isLoggedIn() {
 
-		if(isset($_SESSION['twatoken'])&&isset($_SESSION['twaUserID']) && $_SESSION['twaUserID'] == $this->fields[$this->meta['id']] && md5($this->fields['email']) == $_SESSION['twatoken']) {
+		if(isset($_SESSION['twatoken'])&&isset($_SESSION['twaUserID']) && $_SESSION['twaUserID'] == $this->fields[$this->meta['id']] && md5(strtolower($this->fields['email'])) == $_SESSION['twatoken']) {
 			return TRUE;
-		}
-		else {
+		} else {
 			unset($_SESSION['twatoken']);
 			unset($_SESSION['twaUserID']);
 			return FALSE;
@@ -468,7 +468,7 @@ class _CoreUser extends twaModel {
 			if(password_verify($data['password'], $hash)) {
 				if(!$this->isLoggedIn()){
 
-					$authcode = md5($data['email']);
+					$authcode = md5(strtolower($data['email']));
 					$_SESSION['twatoken'] = $authcode;
 					$_SESSION['twaUserID']= $return[0]->user_id;
 					$this->fields[$this->meta['id']] = $return[0]->user_id;

@@ -1,4 +1,4 @@
-twaframework.8.3
+twaframework.9.0
 ================
 
 twaFramework Beta
@@ -6,21 +6,16 @@ twaFramework Beta
 
 Note: twaFramework is currently in beta so you may expect some bugs, issues or unfinished features.
 
-What's New In 8.3
+What's New In 9.0
 =================
 
-We have added some exciting new features to twaframework.8.3
+We have added some exciting new features to twaframework.9.0
 
-1.  You can now create end-points with your web-service requests.  In previous versions of twaframework, your ajax requests were always sent to http://yoursite.com/webservices.php and you had to define to $_POST variables 'axn' and 'code' to decide which method you want to run.  Now you can simply add the axn and code to the URL as shown below:
-	For e.g.  to call the login service you were using axn = "framework/auth" and code = "login", now you can simply call "http://yoursite.com/1/framework/auth/login"
+1.  Core Classes:  We have moved all the code essential for running twaFramework into the "core" folder.  The system classes inherit from these classes.
 
-2.	We have added command line tools to help speed up your development.  Check the command line tools section below
+2.	We have integrated AWS libraries into the model and web-services folders.
 
 3.  Social Media Logins are now built into the system.  Setup your configuration in social.js under the web_content/javascripts/ directory.  See the social logins section below for more information
-
-4.  New twaDeploy class allows you to perform git functions like commit, push and pull.
-
-5.  Image Editing.  We have added a class called twaImage that uses Imagick to perform all image editing functions like cropping, thumbnails, resizing, watermarks and more.
 
 
 Installation Instructions
@@ -240,7 +235,7 @@ Add your model path to the $model_paths array
 		'system/framework/',
 		'system/config/',
 	    'system/config/databases/',
-	    'system/models/myapp'
+	    'system/models/myapp/'
 	);
 	...
 
@@ -271,6 +266,8 @@ Now in our Category.php file, we will start by creating a model that is an exten
 			"created_on" => "",
 			"last_updated_on"=>""
 		);
+
+		$this->protected_fields = array();
 		
 		if($id) {
 			$this->fields[$this->meta['id']] = $id;
@@ -326,38 +323,30 @@ And we are done!  This is the most basic model that we can create. Since we exte
 	));
 	
 5. getJSON() - returns the $this->fields array in json encoded format.
+6. getFields() - returns an array of all the fields.  Note, that getFields() will automatically exclude any protected fields.
+7. safeSave() - safeSave behaves in the same way as save, but it does not allow over-writing of protected fields.  You can use this in your webs=-services when you don't want to over-write important information.
+
+Using framework.js
+------------------
+
+twaFramework comes loaded with a variety of javascript functions added in for your convenience. You can access the functions using the $framework global object in your project. Here is a list of all the functions you can use:
+
+1. $framework.globalsettings() - returns the json of the global settings for the site as saved in the system/config folder.
+
+2. $framework.request(data, onSuccess, onError) - performs an ajax request. The data object contains all the variables to be sent via $_POST. They must contain a value for "axn" and "code".  Refer to the Web-Services section of this document for more information.  The onSuccess and onError functions handle appropriate actions.  The onSuccess function of the .request function expects a JSON object.
+
+3. $framework.load(data, onSuccess, onError) - performs an ajax request. The .load() function is similar to the .request function except that the onSuccess function for .load() does not expect a JSON object.  This can be used to load HTML components.
+
+4. $framework.modal(data, onLoad) - loads a modal component using ajax request and adds the returned HTML to a DOM object represented by the "container" field provided in the data object.
+
+5. $framework.screen() - returns the width and height of the screen.
+
+Check out the framework.js file for more functions.
 
 
-Using The Command Line
-----------------------
+Using user.js
+-------------
 
-As of version 8.2, twaframework comes with a command line tool for creating components, pages, javascript files and stylesheets.
-
-To use command line tools add the bin folder under twaframework to your PATH.
-	
-	EXPORT PATH=$PATH:/path/to/twaframework/bin
-	
-Using commands is really simple.
-
-To create a component:
-
-	twa -c <component name>
-	
-To create a page
-	
-	twa -p <page name>
-	
-To create a stylesheet
-
-	twa -t <stylesheet name>
-	
-To create a javascript
-
-	twa -s <script name>
-	
-Many times you need to add a page along with a javascript and stylesheet to go with it.  You then also need to include the javascript and stylesheet into your page. To do all this you can call the -pkg option
-
-	twa -pkg <page name>
-	
-
+twaFramework provides a $user object that contains information about the logged in user. To identify if a user is logged in, you can check the $user.isLoggedIn variable.
+To get information about the logged in user, you can access $user.fields object.  All non-sensitive information is available through this object.  To get social media information for the user, use $user.social
 

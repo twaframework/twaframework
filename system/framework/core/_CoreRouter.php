@@ -9,7 +9,7 @@
 
 defined('_TWACHK') or die;
 
- 
+
 class _CoreRouter {
 
 	/**
@@ -67,7 +67,7 @@ class _CoreRouter {
 			$server_name = $_SERVER['SERVER_NAME'];
 		}
 
-		$uri = $_SERVER['REQUEST_URI'];
+		$uri = strtok($_SERVER['REQUEST_URI'],'?');
 		$path = "";
 
 		if(isset($_SERVER['ORIG_PATH_INFO'])) {
@@ -80,10 +80,16 @@ class _CoreRouter {
 
 		if((!$path || $path == "" )&&!$_GET){
 			//No path information found
-			$this->param['siteurl']= $this->param['protocol'].$server_name.str_replace("webservices.php","",$_SERVER['REQUEST_URI']);
-			$this->param['secureurl'] = 'https://'.$server_name.str_replace("webservices.php","",$_SERVER['REQUEST_URI']);
+
+			$this->param['siteurl']= $this->param['protocol'].$server_name.str_replace("webservices.php","",$uri);
+			$this->param['secureurl'] = 'https://'.$server_name.str_replace("webservices.php","",$uri);
 
 			return false;
+		}
+
+
+		if($uri == "/"){
+			$uri = "";
 		}
 
 		$uri_parts = explode('/',$uri);
@@ -100,6 +106,10 @@ class _CoreRouter {
 					$base .= $part."/";
 				}
 			}
+		}
+
+		if($base == ""){
+			$base = "/";
 		}
 
 		$this->param['siteurl'] = $this->param['protocol'].$server_name.$base;
@@ -269,7 +279,7 @@ class _CoreRouter {
 			global $framework;
 			$this->routes = new twaRoutes();
 		}
-	return $this->routes;
+		return $this->routes;
 
 	}
 	/**
@@ -383,9 +393,5 @@ class _CoreRouter {
 	}
 
 }
-
-
-
-
 
 ?>
