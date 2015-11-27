@@ -59,6 +59,10 @@ class _CoreService{
 		$axn = $this->router->getPost('axn');
 		$code = $this->router->getPost('code');
 
+		if($axn == "" || $code == ""){
+			$axn = $this->router->param['axn'];
+			$code = $this->router->param['code'];
+		}
 
 		if(isset($this->router->getRoutes()->service[$axn."/".$code])) {
 			if($this->router->getRoutes()->service[$axn."/".$code]['access'] == AUTHORIZE_ALL) {

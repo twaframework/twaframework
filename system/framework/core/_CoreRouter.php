@@ -199,6 +199,9 @@ class _CoreRouter {
 		$axn = $this->components[1] . "/" . $this->components[2];
 
 		if ($this->isWebService($axn)) {
+			$axn_path=$framework->systempath.DS.'webservices'.DS.$axn.".php";
+			require_once $axn_path;
+			$this->param['axn'] = $axn;
 			$this->param['class'] = 'twaWebServices_' . $this->components[1] . "_" . $this->components[2];
 			$code = $this->components[3];
 			if ($this->isWebServiceFunction($code)) {
