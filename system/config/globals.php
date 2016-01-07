@@ -50,7 +50,7 @@ $model_paths[] ='system/models/twitter/';
 /*********** TO USE AMAZON WEB-SERVICES API *************/
 /*
 $mpath = BASE_PATH.DS.'system'.DS.'models'.DS;
-require $mpath.'aws.phar';
+require_once $mpath.'aws.phar';
 $model_paths[] ='system/models/aws/';
 
 use Aws\Ses\SesClient;

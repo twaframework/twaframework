@@ -28,7 +28,7 @@ spl_autoload_register('loadClasses');//Ask the autoload register to use loadClas
 $framework = new twaFramework();
 $app = $framework->getApp('app');
 $router = $framework->load('twaRouter');
-if(!$router->parse()) {
+if($router->parse()) {
     $router->setWebServiceRoute();
 } else {
     echo json_encode(array("returnCode" => 1, "error" => "No Web Service Found"));

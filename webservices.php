@@ -49,6 +49,9 @@ if(!$axn || $axn == ""){
 if(!$code || $code == ""){
 	$code = $_POST['method'];
 }
+$router = $framework->load('twaRouter');
+$router->param['axn'] = $axn;
+$router->param['code'] = $code;
 
 $framework->load('twaDebugger')->dump($_POST);
 
